@@ -38,9 +38,14 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'account_change_password' %}">Change PW</a></li>
                   <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+                  {% else %}
+                  <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Register</a></li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
