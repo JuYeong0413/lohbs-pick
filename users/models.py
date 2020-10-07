@@ -13,7 +13,7 @@ class CollectionProduct(models.Model):
 
 class Collection(models.Model):
     collection_products = models.ManyToManyField(CollectionProduct, related_name="collection_products", symmetrical=False, blank=True, through='Collecting')
-    collection_price = models.PositiveIntegerField(_('총 가격'), blank=True)
+    collection_total = models.PositiveIntegerField(_('총 가격'), blank=True)
     period = models.PositiveSmallIntegerField(_('주기'))
     name = models.CharField(_('컬렉션명'), max_length=100)
 
