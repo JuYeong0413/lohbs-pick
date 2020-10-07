@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) # 사용자
-    order_total = models.IntegerField() # 가격합계
+    order_total = models.PositiveIntegerField() # 가격합계
     address = models.CharField(max_length=300) # 주소
     collection = models.ForeignKey(Collection, on_delete=models.SET_NULL) # 컬렉션
     collection_name = models.CharField(max_length=50) # 컬렉션 이름
@@ -15,8 +15,8 @@ class Order(models.Model):
 
 class OrderProduct(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL) # 제품
-    quantity = models.IntegerField() # 수량
-    price = models.IntegerField() # 가격
+    quantity = models.PositiveIntegerField() # 수량
+    price = models.PositiveIntegerField() # 가격
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
