@@ -9,6 +9,8 @@ class Profile(models.Model):
     profile_image = models.ImageField(_('프로필 이미지'), upload_to="profile_images/", default="images/default_profile.jpg") # 프로필이미지
     profile_address = models.CharField(_('프로필 주소'), max_length=300) # 주소
     phone = models.CharField(_('연락처'), max_length=20) # 연락처
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name ='프로필'
