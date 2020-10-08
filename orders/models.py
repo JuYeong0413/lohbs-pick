@@ -33,7 +33,7 @@ class Ordering(models.Model):
 
 
 class Share(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL) # 작성자(싸용자)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL) # 작성자(사용자)
     image = models.ImageField(upload_to='s_images/') # 이미지
     content = models.TextField() # 내용
     collection_products = models.ManyToManyField(Item, related_name="collection_products", through="CollectionProduct") # 컬렉션상품
