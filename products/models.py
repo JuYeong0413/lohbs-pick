@@ -18,9 +18,9 @@ class Product(models.Model):
     ]   
 
     brand = models.CharField(_('브랜드명'), max_length=100) 
-    name = models.CharField(_('제품명'),max_length=100)
-    price = models.PositiveIntegerField(_('제품가격'))
-    image = models.ImageField(_('제품이미지'),upload_to='product_images/')
-    category = models.PositiveSmallIntegerField(_('제품종류'), choices = PRODUCT_KIND_CHOICES)
+    name = models.CharField(_('상품명'),max_length=100)
+    price = models.PositiveIntegerField(_('상품가격'))
+    image = models.ImageField(_('상품이미지'),upload_to='product_images/')
+    category = models.PositiveSmallIntegerField(_('상품종류'), choices = PRODUCT_KIND_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
