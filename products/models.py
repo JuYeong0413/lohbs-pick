@@ -22,3 +22,5 @@ class Product(models.Model):
     price = models.PositiveIntegerField(_('제품가격'))
     image = models.ImageField(_('제품이미지'),upload_to='product_images/')
     category = models.PositiveSmallIntegerField(_('제품종류'), choices = PRODUCT_KIND_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -6,6 +6,8 @@ class CollectionProduct(models.Model):
     product = models.OneToOneField(Product, verbose_name=_('제품'), blank=True, on_delete=models.CASCADE)
     qunatity = models.PositiveSmallIntegerField(_('수량'))
     sub_total = models.PositiveIntegerField(_('가격'))
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         self.price = self.product.price*self.amount
@@ -25,6 +27,8 @@ class Collection(models.Model):
     collection_total = models.PositiveIntegerField(_('총 가격'), blank=True)
     period = models.CharField(_('주기'), max_length=2, choices=PERIOD_CHOICES)
     name = models.CharField(_('컬렉션명'), max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name='컬렉션'
