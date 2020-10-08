@@ -12,9 +12,18 @@ class CollectionProduct(models.Model):
         super().save(*args, **kwargs)
 
 class Collection(models.Model):
-    collection_products = models.ManyToManyField(CollectionProduct, related_name="collection_products", symmetrical=False, blank=True, through='Collecting')
+    PERIOD_CHOICES = [
+        ("1W", "1주"),
+        ("2W", "2주"),
+        ("3W", "3주"),
+        ("1M", "1달"),
+        ("2M", "2달"),
+        ("3M", "3달"),
+    ]   
+
+    collection_products = models.ManyToManyField(CollectionProduct, related_name="collection_products", blank=True, through='Collecting')
     collection_total = models.PositiveIntegerField(_('총 가격'), blank=True)
-    period = models.PositiveSmallIntegerField(_('주기'))
+    period = models.CharField(_('주기'), max_length=2, choices=PERIOD_CHOICES)
     name = models.CharField(_('컬렉션명'), max_length=100)
 
     class Meta:
