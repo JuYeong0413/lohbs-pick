@@ -46,7 +46,7 @@ class Share(models.Model):
     image = models.ImageField(_('이미지'), upload_to='s_images/')
     content = models.TextField(_('내용'))
     collection_name = models.CharField(_('컬렉션명'), max_length=100)
-    collection_products = models.ManyToManyField(CollectionProduct, verbose_name=_('컬렉션상품'), related_name="collection_products", through="Collecting") # 컬렉션상품
+    collection_products = models.TextField(_('컬렉션상품'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
