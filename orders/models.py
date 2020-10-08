@@ -10,9 +10,13 @@ class Order(models.Model):
     address = models.CharField(_('배송지 주소'), max_length=300)
     collection = models.ForeignKey(Collection, verbose_name=_('컬렉션'), on_delete=models.SET_NULL)
     collection_name = models.CharField(_('컬렉션명'), max_length=100)
-    order_products = models.ManyToManyField(OrderProduct, related_name="order_products", through="Ordering") # 주문상품
+    order_products = models.ManyToManyField(OrderProduct, verbose_name=_('주문상품'), related_name="order_products", through="Ordering")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name='주문'
+        verbose_name_plural='주문'
 
 
 class OrderProduct(models.Model):
@@ -21,6 +25,10 @@ class OrderProduct(models.Model):
     price = models.PositiveIntegerField(_('가격'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name='주문상품'
+        verbose_name_plural='주문상품'
 
 
 class Ordering(models.Model):
@@ -38,6 +46,10 @@ class Share(models.Model):
     image = models.ImageField(_('이미지'), upload_to='s_images/')
     content = models.TextField(_('내용'))
     collection_name = models.CharField(_('컬렉션명'), max_length=100)
-    collection_products = models.ManyToManyField(CollectionProduct, related_name="collection_products", through="Collecting") # 컬렉션상품
+    collection_products = models.ManyToManyField(CollectionProduct, verbose_name=_('컬렉션상품'), related_name="collection_products", through="Collecting") # 컬렉션상품
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name='공유'
+        verbose_name_plural='공유'
