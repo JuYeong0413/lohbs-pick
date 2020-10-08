@@ -42,11 +42,11 @@
 					<div class="login_form_inner register_form_inner">
 						<h3>Create an account</h3>
 						<form class="row login_form" method="POST" action="{% url 'account_signup' %}" id="register_form" >
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                            {% endif %}
+							{% csrf_token %}
+							{{ form.as_p }}
+							{% if redirect_field_value %}
+							<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+							{% endif %}
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-register w-100">{% trans "Sign Up" %}</button>
 							</div>
