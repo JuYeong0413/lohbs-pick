@@ -9,7 +9,7 @@ class Order(models.Model):
     address = models.CharField(max_length=300) # 주소
     collection = models.ForeignKey(Collection, on_delete=models.SET_NULL) # 컬렉션
     collection_name = models.CharField(max_length=100) # 컬렉션명
-    order_products = models.ManyToManyField(OrderProduct, related_name="order_products", through="OrderProduct") # 주문상품
+    order_products = models.ManyToManyField(OrderProduct, related_name="order_products", through="Ordering") # 주문상품
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
