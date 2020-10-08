@@ -16,7 +16,7 @@ class Order(models.Model):
 
 class OrderProduct(models.Model):
     product = models.OneToOneField(Product, on_delete=models.SET_NULL) # 상품
-    quantity = models.PositiveIntegerField() # 수량
+    quantity = models.PositiveSmallIntegerField() # 수량
     price = models.PositiveIntegerField() # 가격
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
