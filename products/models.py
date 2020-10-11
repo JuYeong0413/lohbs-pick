@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 class Product(models.Model):
-
     PRODUCT_KIND_CHOICES = [
         (0, "스킨케어"),
         (1, "메이크업"),
