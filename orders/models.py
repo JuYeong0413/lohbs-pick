@@ -1,7 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 from products.models import *
+from users.models import *
 from django.utils.translation import ugettext_lazy as _
+
+class OrderProduct(models.Model):
+    product = models.OneToOneField(Product, verbose_name=_('상품'), on_delete=models.SET_NULL)
+    quantity = models.PositiveSmallIntegerField(_('수량'))
+    price = models.PositiveIntegerField(_('가격'))
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name='주문상품'
+        verbose_name_plural='주문상품'
 
 
 class Order(models.Model):
@@ -17,18 +29,6 @@ class Order(models.Model):
     class Meta:
         verbose_name='주문'
         verbose_name_plural='주문'
-
-
-class OrderProduct(models.Model):
-    product = models.OneToOneField(Product, verbose_name=_('상품'), on_delete=models.SET_NULL)
-    quantity = models.PositiveSmallIntegerField(_('수량'))
-    price = models.PositiveIntegerField(_('가격'))
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name='주문상품'
-        verbose_name_plural='주문상품'
 
 
 class Ordering(models.Model):
