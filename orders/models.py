@@ -38,4 +38,6 @@ class Ordering(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together=(('order', 'order_product'))
+        unique_together=(
+            ('order', 'order_product')
+        )
