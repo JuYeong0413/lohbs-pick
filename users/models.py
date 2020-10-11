@@ -67,7 +67,7 @@ class Collecting(models.Model):
 
 
 class Share(models.Model):
-    user = models.ForeignKey(User, verbose_name=_('작성자'), on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, verbose_name=_('작성자'), on_delete=models.SET_NULL, null=True)
     image = models.ImageField(_('이미지'), upload_to='s_images/')
     content = models.TextField(_('내용'))
     collection_name = models.CharField(_('컬렉션명'), max_length=100)
