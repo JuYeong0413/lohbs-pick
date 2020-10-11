@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from products.models import *
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, verbose_name=_('사용자'), on_delete=models.CASCADE) # 사용자
-    nickname = models.CharField(_('닉네임'), max_length=10, unique=True) # 닉네임
-    profile_image = models.ImageField(_('프로필 이미지'), upload_to="profile_images/", default="images/default_profile.jpg") # 프로필이미지
-    profile_address = models.CharField(_('프로필 주소'), max_length=300) # 주소
-    phone = models.CharField(_('연락처'), max_length=20) # 연락처
+    user = models.OneToOneField(User, verbose_name=_('사용자'), on_delete=models.CASCADE)
+    nickname = models.CharField(_('닉네임'), max_length=10, unique=True)
+    profile_image = models.ImageField(_('프로필 이미지'), upload_to="profile_images/", default="images/default_profile.jpg")
+    profile_address = models.CharField(_('프로필 주소'), max_length=300)
+    phone = models.CharField(_('연락처'), max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -59,6 +59,8 @@ class Collection(models.Model):
 class Collecting(models.Model):
     collection = models.ForeignKey(Collection, verbose_name= _('컬렉션'), on_delete=models.CASCADE)
     collection_product = models.ForeignKey(CollectionProduct, verbose_name= _('컬렉션 상품'), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
         unique_together=(
