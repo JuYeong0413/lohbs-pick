@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<!-- ================ start banner area ================= -->	
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Login</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Login</li>
+        </ol>
+      </nav>
+            </div>
+        </div>
+</div>
+</section>
+<!-- ================ end banner area ================= -->
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <div class="hover">
+                        {% if socialaccount_providers %}
+                        <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                        of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                        for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+                        <div class="socialaccount_ballot">
+
+                        <ul class="socialaccount_providers">
+                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                        </ul>
+
+                        <div class="login-or">{% trans 'or' %}</div>
+
+                        </div>
+
+                        {% include "socialaccount/snippets/login_extra.html" %}
+
+                        {% else %}
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                        <a class="button button-account" href="{{ signup_url }}">Create an Account</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Log in to enter</h3>
+                    <form class="row login_form" method="POST" action="{% url 'account_login' %}" id="contactForm" >
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="button button-login w-100">{% trans "Sign In" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+
+{% endblock %}
