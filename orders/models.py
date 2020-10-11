@@ -33,7 +33,7 @@ class Order(models.Model):
 
 class Ordering(models.Model):
     order = models.ForeignKey(Order, verbose_name=_('주문'), on_delete=models.CASCADE)
-    order_products = models.ForeignKey(OrderProduct, verbose_name=_('주문 상품'), on_delete=models.CASCADE)
+    order_product = models.ForeignKey(OrderProduct, verbose_name=_('주문 상품'), on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
