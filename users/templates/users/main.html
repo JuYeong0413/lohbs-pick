@@ -28,7 +28,7 @@
 				<div class="col-lg-6">
 					<div class="owl-carousel owl-theme s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ user_profile.profile_imageimageimageimageimageimageimageimageimageimageimageimageimageimage.url }}" alt="">
+							<img class="img-fluid" src="{{ user_profile.profile_image.url }}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -47,17 +47,13 @@
 							<li><a href="#"><span>Address</span> : {{ user_profile.address }}</a></li>
 						</ul>
 						<p>상세 설명(필요시)</p>
-						<div class="product_count">
+						{% if user == user_profile %}<div class="product_count">
                             <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
 							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
                class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
-							<a class="button primary-btn" href="#">회원정보 수정</a>               
-						</div>
-						<div class="card_area d-flex align-items-center">
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
-						</div>
+                        <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>{% endif %}               
+                        </div>
 					</div>
 				</div>
 			</div>
