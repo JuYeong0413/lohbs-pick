@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'products',
+    'picks',
     # user
     'allauth',
     'allauth.account',
