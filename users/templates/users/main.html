@@ -1,7 +1,67 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>
-    My page
-</h1>
+	
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="blog">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Mypage</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Mypage</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+
+  <!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="owl-carousel owl-theme s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{ user_profile.profile_imageimageimageimageimageimageimageimageimageimageimageimageimageimage.url }}" alt="">
+						</div>
+						<!-- <div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div>
+						<div class="single-prd-item">
+							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+						</div> -->
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{ user_profile.username }}</h3>
+						<h2>{{ user_profile.nickname }}</h2>
+						<ul class="list">
+							<li><a class="active" href="#"><span>Phone</span> : {{ user_profile.phone }}</a></li>
+							<li><a href="#"><span>Address</span> : {{ user_profile.address }}</a></li>
+						</ul>
+						<p>상세 설명(필요시)</p>
+						<div class="product_count">
+                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+               class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
+							<a class="button primary-btn" href="#">회원정보 수정</a>               
+						</div>
+						<div class="card_area d-flex align-items-center">
+							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
+							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->
 {% endblock %}
