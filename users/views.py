@@ -4,13 +4,13 @@ from .models import *
 
 # 프로필 페이지
 def main(request, id):
-    user_profile = get_object_or_404(User, pk=id)
+    user_profile = get_object_or_404(Profile, pk=id)
     return render(request, 'users/main.html', {'user_profile': user_profile})
 
 # 프로필 수정 페이지
 def edit(request, id):
     current_user = request.user
-    user = get_object_or_404(User, pk=id)
+    user = get_object_or_404(Profile, pk=id)
 
     if user == current_user:
         return render(request, 'users/edit.html', {'user': user})
@@ -21,7 +21,7 @@ def edit(request, id):
 # 프로필 수정
 def update(request, id):
     if request.method == "POST":
-        user = get_object_or_404(User, pk=id)
+        user = get_object_or_404(Profile, pk=id)
         nickname = request.POST.get('nickname')
         profile_address = request.POST.get('profile_address')
         phone = request.POST.get('phone')

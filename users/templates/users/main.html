@@ -40,14 +40,13 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>id : {{ user_profile.username }}</h3>
 						<h2>nickname : {{ user_profile.nickname }}</h2>
 						<ul class="list">
 							<li><a class="active" href="#"><span>Phone</span> : {{ user_profile.phone }}</a></li>
 							<li><a href="#"><span>Address</span> : {{ user_profile.profile_address }}</a></li>
 						</ul>
 						<p>상세 설명(필요시)</p>
-						{% if user == user_profile %}
+						{% if user.nickname == user_profile.nickname %}
                         <div class="product_count">
                             <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
 							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
