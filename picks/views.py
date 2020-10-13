@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def lohbs_pick(request):
+    return render(request, 'picks/lohbs_pick.html')
