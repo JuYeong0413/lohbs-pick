@@ -64,7 +64,9 @@
                 <div class="input-group filter-bar-search">
                     <input type="text" placeholder="Search" name="query">
                     <div class="input-group-append">
-                      <button type="submit"><i class="ti-search"></i></button>
+                      <button type="submit">
+                        <i class="ti-search"></i>
+                      </button>
                     </div>
                 </div>
               </form>
@@ -75,23 +77,25 @@
           <!-- Start Best Seller -->
           <section class="lattest-product-area pb-40 category-list">
             <div class="row">
-              {% for product in products %}
-                <div class="col-md-6 col-lg-4">
-                  <div class="card text-center card-product">
-                    <div class="card-product__img">
-                      <img class="card-img" src="{{ product.image.url }}" alt="">
-                      <ul class="card-product__imgOverlay">
-                        <li><button><i class="fas fa-plus"></i></button></li>
-                      </ul>
-                    </div>
-                    <div class="card-body">
-                      <p>{{ product.brand }}</p>
-                      <h6 class="card-product__title">{{ product.name }}</h6>
-                      <p class="card-product__price">{{ product.price }}원</p>
+              {% if search_products.exists %}
+                {% for product in search_products %}
+                  <div class="col-md-6 col-lg-4">
+                    <div class="card text-center card-product">
+                      <div class="card-product__img">
+                        <img class="card-img" src="{{ product.image.url }}" alt="">
+                        <ul class="card-product__imgOverlay">
+                          <li><button><i class="fas fa-plus"></i></button></li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <p>{{ product.brand }}</p>
+                        <h6 class="card-product__title">{{ product.name }}</h6>
+                        <p class="card-product__price">{{ product.price }}원</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              {% endif %}
             </div>
           </section>
           <!-- End Best Seller -->
