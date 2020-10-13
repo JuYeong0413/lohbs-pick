@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from products.models import *
-from users.models import *
+from picks.models import *
 from django.utils.translation import ugettext_lazy as _
 
 class OrderProduct(models.Model):
