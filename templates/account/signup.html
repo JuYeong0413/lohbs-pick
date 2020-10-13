@@ -43,7 +43,37 @@
 						<h3>Create an account</h3>
 						<form class="row login_form" method="POST" action="{% url 'account_signup' %}" id="register_form" >
 							{% csrf_token %}
-							{{ form.as_p }}
+							<div class="form-group">
+                                <label for="id_email" class="control-label">
+                                이메일 (선택사항)
+                                </label> 
+                                <input type="email" name="email" id="id_email" class="input-md round form-control" placeholder="이메일">           
+                            </div>
+
+                            <!-- Username -->
+                            <div class="form-group">
+                                <label for="id_username" class="control-label">
+                                아이디<span class="asteriskField">*</span> 
+                                </label>  
+                                <input type="text" name="username" autofocus="autofocus" id="username" class="input-md round form-control" placeholder="아이디" required id="id_username">
+                            </div>                   
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="password" class="control-label">
+                                    비밀번호<span class="asteriskField">*</span> 
+                                </label>    
+                                <input type="password" name="password1" required id="id_password" class="input-md round form-control" placeholder="비밀번호"> 
+                            </div>
+
+
+                            <!-- Re-enter Password -->
+                            <div class="form-group">
+                                <label for="re-password" class="control-label">
+                                    비밀번호 (확인) <span class="asteriskField">*</span> 
+                                </label>    
+                                <input type="password" name="password2" required id="id_password2" class="input-md round form-control" placeholder="비밀번호(확인)"> 
+                            </div>
 							{% if redirect_field_value %}
 							<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 							{% endif %}

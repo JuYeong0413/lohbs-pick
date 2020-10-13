@@ -22,4 +22,6 @@ urlpatterns = [
     path('', views.main),
     path('accounts/', include('allauth.urls')),
     path('users/', include('users.urls')),
+    path('products/', include('products.urls')),
+    path('picks/', include('picks.urls')),
 ]
