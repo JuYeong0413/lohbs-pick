@@ -10,7 +10,7 @@ def shared(request):
     return render(request, 'picks/shared.html')
 
 
-# 롭스픽 공유글 작성
+# 롭스픽 공유글 작성 페이지
 def share_new(request):
     return render(request, 'picks/share_new.html')
 
