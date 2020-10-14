@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+	<!-- ================ start banner area ================= -->	
+	<!-- <section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Shop Category</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section> -->
+	<!-- ================ end banner area ================= -->
+
+
+	<!-- ================ category section start ================= -->		  
+  <section class="section-margin--small mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-5">
+          <div class="sidebar-categories">
+            <div class="head"><a href="{% url 'products:main' %}" style="color:white;">ALL Products</a></div>
+            <ul class="main-categories">
+              <li class="common-filter">
+                <form action="{% url 'products:category_list' %}">
+                    <ul>
+                      <li class="filter-list"><input class="pixel-radio" type="radio"  name="category" value="0" onclick="this.form.submit()"><label>스킨케어</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="category" value="1" onclick="this.form.submit()"><label for="women">메이크업</li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="category" value="2" onclick="this.form.submit()"><label for="accessories">헤어케어</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="category" value="3" onclick="this.form.submit()"><label for="footwear">바디케어</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="category" value="4" onclick="this.form.submit()"><label for="bayItem">향수/방향</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="category" value="5" onclick="this.form.submit()"><label for="electronics">리빙/잡화</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="6" onclick="this.form.submit()"><label for="food">맨케어</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="7" onclick="this.form.submit()"><label for="food">헬스</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="9" onclick="this.form.submit()"><label for="food">베이비케어</label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="10" onclick="this.form.submit()"><label for="food">펫케어</label></li>
+                    </ul>
+                  </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xl-9 col-lg-8 col-md-7">
+          <!-- Start Filter Bar -->
+          <div class="filter-bar d-flex flex-wrap align-items-center">
+            <div class="sorting mr-auto">
+              <select>
+                <option value="popluar">인기순</option>
+                <option value="lowPrice">낮은 가격순</option>
+                <option value="highPrice">높은 가격순</option>
+              </select>
+            </div>
+            <div>
+              <form action="{% url 'products:search' %}">
+                <div class="input-group filter-bar-search">
+                    <input type="text" placeholder="Search" name="query">
+                    <div class="input-group-append">
+                      <button type="submit"><i class="ti-search"></i></button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- End Filter Bar -->
+          
+          <!-- Start Best Seller -->
+          <section class="lattest-product-area pb-40 category-list">
+            <div class="row">
+              {% for product in category_lists %}
+                <div class="col-md-6 col-lg-4">
+                  <div class="card text-center card-product">
+                    <div class="card-product__img">
+                      <img class="card-img" src="{{ product.image.url }}" alt="">
+                      <ul class="card-product__imgOverlay">
+                        <li><button><i class="fas fa-plus"></i></button></li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <p>{{ product.brand }}</p>
+                      <h6 class="card-product__title">{{ product.name }}</h6>
+                      <p class="card-product__price">{{ product.price }}원</p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+          <!-- End Best Seller -->
+        </div>
+      </div>
+    </div>
+  </section>
+	<!-- ================ category section end ================= -->		  
+
+
+	<!-- ================ Subscribe section start ================= -->		  
+  <section class="subscribe-position">
+    <div class="container">
+      <div class="subscribe text-center">
+        <h3 class="subscribe__title">Get Update From Anywhere</h3>
+        <p>Bearing Void gathering light light his eavening unto dont afraid</p>
+        <div id="mc_embed_signup">
+          <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe-form form-inline mt-5 pt-1">
+            <div class="form-group ml-sm-auto">
+              <input class="form-control mb-1" type="email" name="EMAIL" placeholder="Enter your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" >
+              <div class="info"></div>
+            </div>
+            <button class="button button-subscribe mr-auto mb-1" type="submit">Subscribe Now</button>
+            <div style="position: absolute; left: -5000px;">
+              <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+            </div>
+
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- ================ Subscribe section end ================= -->		  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  <script>
+      let temp = {{ output }};
+      $(":radio[name='category']").each(function() {
+          var $this = $(this);
+          if($this.val() == temp)
+              $this.attr('checked', true);
+      });
+  </script>
+  {% endblock %}

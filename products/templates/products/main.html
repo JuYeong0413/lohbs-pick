@@ -3,7 +3,7 @@
 {% block content %}
 
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
+	<!-- <section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
@@ -17,7 +17,7 @@
 				</div>
 			</div>
     </div>
-	</section>
+	</section> -->
 	<!-- ================ end banner area ================= -->
 
 
@@ -27,22 +27,22 @@
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
           <div class="sidebar-categories">
-            <div class="head">Categories</div>
+            <div class="head"><a href="{% url 'products:main' %}" style="color:white;">ALL Products</a></div>
             <ul class="main-categories">
               <li class="common-filter">
-                <form action="#">
+                <form action="{% url 'products:category_list' %}">
                   <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand" ><label for="men">스킨케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="brand"><label for="women">메이크업</li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="brand"><label for="accessories">헤어케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="brand"><label for="footwear">바디케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="brand"><label for="bayItem">향수/방향</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="brand"><label for="electronics">리빙/잡화</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">맨케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">헬스</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">푸드</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">베이비케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="brand"><label for="food">펫케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="category" value="0" onclick="this.form.submit()"><label for="men">스킨케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="category" value="1" onclick="this.form.submit()"><label for="women">메이크업</li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="category" value="2" onclick="this.form.submit()"><label for="accessories">헤어케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="category" value="3" onclick="this.form.submit()"><label for="footwear">바디케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="category" value="4" onclick="this.form.submit()"><label for="bayItem">향수/방향</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="category" value="5" onclick="this.form.submit()"><label for="electronics">리빙/잡화</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="6" onclick="this.form.submit()"><label for="food">맨케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="7" onclick="this.form.submit()"><label for="food">헬스</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="9" onclick="this.form.submit()"><label for="food">베이비케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="10" onclick="this.form.submit()"><label for="food">펫케어</label></li>
                   </ul>
                 </form>
               </li>
@@ -54,9 +54,9 @@
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting mr-auto">
               <select>
-                <option value="1">인기순</option>
-                <option value="1">낮은 가격순</option>
-                <option value="1">높은 가격순</option>
+                <option value="popluar">인기순</option>
+                <option value="lowPrice">낮은 가격순</option>
+                <option value="highPrice">높은 가격순</option>
               </select>
             </div>
             <div>
@@ -125,5 +125,5 @@
       </div>
     </div>
   </section>
-	<!-- ================ Subscribe section end ================= -->		  
+  <!-- ================ Subscribe section end ================= -->		  
 {% endblock %}
