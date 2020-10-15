@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 	<!-- ================ start banner area ================= -->	
@@ -32,17 +33,17 @@
               <li class="common-filter">
                 <form action="{% url 'products:category_list' %}">
                   <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="category" value="0" onclick="this.form.submit()"><label for="men">스킨케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="women" name="category" value="1" onclick="this.form.submit()"><label for="women">메이크업</li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="accessories" name="category" value="2" onclick="this.form.submit()"><label for="accessories">헤어케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="footwear" name="category" value="3" onclick="this.form.submit()"><label for="footwear">바디케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bayItem" name="category" value="4" onclick="this.form.submit()"><label for="bayItem">향수/방향</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="electronics" name="category" value="5" onclick="this.form.submit()"><label for="electronics">리빙/잡화</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="6" onclick="this.form.submit()"><label for="food">맨케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="7" onclick="this.form.submit()"><label for="food">헬스</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="9" onclick="this.form.submit()"><label for="food">베이비케어</label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="10" onclick="this.form.submit()"><label for="food">펫케어</label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="skincare" name="category" value="0" onclick="this.form.submit()"><label for="skincare">스킨케어<span> ({{ category_no.0 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="makeup" name="category" value="1" onclick="this.form.submit()"><label for="makeup">메이크업 <span> ({{ category_no.1 }})</span></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="haircare" name="category" value="2" onclick="this.form.submit()"><label for="haircare">헤어케어 <span> ({{ category_no.2 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bodycare" name="category" value="3" onclick="this.form.submit()"><label for="bodycare">바디케어 <span> ({{ category_no.3 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="perfume" name="category" value="4" onclick="this.form.submit()"><label for="perfume">향수/방향 <span> ({{ category_no.4 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="living" name="category" value="5" onclick="this.form.submit()"><label for="living">리빙/잡화 <span> ({{ category_no.5 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="mencare" name="category" value="6" onclick="this.form.submit()"><label for="mencare">맨케어 <span> ({{ category_no.6 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="health" name="category" value="7" onclick="this.form.submit()"><label for="helath">헬스 <span> ({{ category_no.7 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드 <span> ({{ category_no.8 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="babycare" name="category" value="9" onclick="this.form.submit()"><label for="babycare">베이비케어 <span> ({{ category_no.9 }})</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="petcare" name="category" value="10" onclick="this.form.submit()"><label for="petcare">펫케어 <span> ({{ category_no.10 }})</span></label></li>
                   </ul>
                 </form>
               </li>
@@ -87,7 +88,8 @@
                     <div class="card-body">
                       <p>{{ product.brand }}</p>
                       <h6 class="card-product__title">{{ product.name }}</h6>
-                      <p class="card-product__price">{{ product.price }}원</p>
+                      <p class="card-product__price" style="display: inline;">{{ product.price | intcomma }}</p>
+                      <p style="display:inline; font-size:14px;">원</p>
                     </div>
                   </div>
                 </div>
@@ -101,29 +103,4 @@
   </section>
 	<!-- ================ category section end ================= -->		  
 
-
-	<!-- ================ Subscribe section start ================= -->		  
-  <section class="subscribe-position">
-    <div class="container">
-      <div class="subscribe text-center">
-        <h3 class="subscribe__title">Get Update From Anywhere</h3>
-        <p>Bearing Void gathering light light his eavening unto dont afraid</p>
-        <div id="mc_embed_signup">
-          <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe-form form-inline mt-5 pt-1">
-            <div class="form-group ml-sm-auto">
-              <input class="form-control mb-1" type="email" name="EMAIL" placeholder="Enter your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" >
-              <div class="info"></div>
-            </div>
-            <button class="button button-subscribe mr-auto mb-1" type="submit">Subscribe Now</button>
-            <div style="position: absolute; left: -5000px;">
-              <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-            </div>
-
-          </form>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-  <!-- ================ Subscribe section end ================= -->		  
 {% endblock %}
