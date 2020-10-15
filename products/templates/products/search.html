@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
 	<!-- ================ start banner area ================= -->	
@@ -90,7 +91,7 @@
                       <div class="card-body">
                         <p>{{ product.brand }}</p>
                         <h6 class="card-product__title">{{ product.name }}</h6>
-                        <p class="card-product__price" style="display: inline;">{{ product.price }}</p>
+                        <p class="card-product__price" style="display: inline;">{{ product.price | intcomma }}</p>
                         <p style="display:inline; font-size:14px;">원</p>
                       </div>
                     </div>
