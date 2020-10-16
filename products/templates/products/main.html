@@ -27,28 +27,30 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
-          <div class="sidebar-categories">
-            <div class="head"><a href="{% url 'products:main' %}" style="color:white;">ALL Products</a></div>
-            <ul class="main-categories">
-              <li class="common-filter">
-                <form action="{% url 'products:category_list' %}">
-                  <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="skincare" name="category" value="0" onclick="this.form.submit()"><label for="skincare">스킨케어<span> ({{ category_no.0 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="makeup" name="category" value="1" onclick="this.form.submit()"><label for="makeup">메이크업 <span> ({{ category_no.1 }})</span></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="haircare" name="category" value="2" onclick="this.form.submit()"><label for="haircare">헤어케어 <span> ({{ category_no.2 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="bodycare" name="category" value="3" onclick="this.form.submit()"><label for="bodycare">바디케어 <span> ({{ category_no.3 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="perfume" name="category" value="4" onclick="this.form.submit()"><label for="perfume">향수/방향 <span> ({{ category_no.4 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="living" name="category" value="5" onclick="this.form.submit()"><label for="living">리빙/잡화 <span> ({{ category_no.5 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="mencare" name="category" value="6" onclick="this.form.submit()"><label for="mencare">맨케어 <span> ({{ category_no.6 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="health" name="category" value="7" onclick="this.form.submit()"><label for="helath">헬스 <span> ({{ category_no.7 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드 <span> ({{ category_no.8 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="babycare" name="category" value="9" onclick="this.form.submit()"><label for="babycare">베이비케어 <span> ({{ category_no.9 }})</span></label></li>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="petcare" name="category" value="10" onclick="this.form.submit()"><label for="petcare">펫케어 <span> ({{ category_no.10 }})</span></label></li>
-                  </ul>
-                </form>
-              </li>
-            </ul>
+          
+          <div class="sidebar-filter mt-0">
+            <div class="top-filter-head"><a href="{% url 'products:main' %}" style="color:white;">ALL Products</a></div>
+              <ul class="main-categories">
+                <li class="common-filter" style="padding-top:25px;">
+                  <form action="{% url 'products:category_list' %}">
+                    <ul>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="skincare" name="category" value="0" onclick="this.form.submit()"><label for="skincare">스킨케어<span> ({{ category_no.0 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="makeup" name="category" value="1" onclick="this.form.submit()"><label for="makeup">메이크업 <span> ({{ category_no.1 }})</span></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="haircare" name="category" value="2" onclick="this.form.submit()"><label for="haircare">헤어케어 <span> ({{ category_no.2 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="bodycare" name="category" value="3" onclick="this.form.submit()"><label for="bodycare">바디케어 <span> ({{ category_no.3 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="perfume" name="category" value="4" onclick="this.form.submit()"><label for="perfume">향수/방향 <span> ({{ category_no.4 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="living" name="category" value="5" onclick="this.form.submit()"><label for="living">리빙/잡화 <span> ({{ category_no.5 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="mencare" name="category" value="6" onclick="this.form.submit()"><label for="mencare">맨케어 <span> ({{ category_no.6 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="health" name="category" value="7" onclick="this.form.submit()"><label for="helath">헬스 <span> ({{ category_no.7 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="food" name="category" value="8" onclick="this.form.submit()"><label for="food">푸드 <span> ({{ category_no.8 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="babycare" name="category" value="9" onclick="this.form.submit()"><label for="babycare">베이비케어 <span> ({{ category_no.9 }})</span></label></li>
+                      <li class="filter-list"><input class="pixel-radio" type="radio" id="petcare" name="category" value="10" onclick="this.form.submit()"><label for="petcare">펫케어 <span> ({{ category_no.10 }})</span></label></li>
+                    </ul>
+                  </form>
+                </li>
+              </ul>
           </div>
+       
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           <!-- Start Filter Bar -->
