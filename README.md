@@ -8,16 +8,22 @@
 ### 1. Main
 
 
-### 2. Musics
+### 2. Products
 
 
-### 3. Playlists
+### 3. Orders
 
 
-### 4. Mypage
+### 4. Picks
 
 
-### 5. Login/Signup
+### 5. Share
+
+
+### 6. Mypage
+
+
+### 7. Login/Signup
 일반 로그인 및 회원가입, 구글 소셜로그인, 테스트 계정 접속 제공  
 테스트 계정은 원활한 이용을 위해 사용자 닉네임 변경이 불가
 
