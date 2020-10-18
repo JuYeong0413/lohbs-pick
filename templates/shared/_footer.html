@@ -1,4 +1,16 @@
 {% load static %}
+
+<style>
+    .developers-name {
+        color: #7b838a;
+        font-family: "Roboto",sans-serif;
+    }
+
+    .developers-name:hover {
+        color: #384aeb;
+    }
+</style>
+
 <!--================ Start footer Area  =================-->	
 <footer class="footer">
     <div class="footer-area">
@@ -35,47 +47,29 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="single-footer-widget instafeed">
-                        <h4 class="footer_title">Gallery</h4>
+                        <h4 class="footer_title">Developers</h4>
                         <ul class="list instafeed d-flex flex-wrap">
-                            <li><img src="{% static 'img/gallery/r1.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r2.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r3.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r5.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r7.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r8.jpg' %}" alt=""></li>
+                            <li>
+                                <a href="https://github.com/ygk13" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/gallery/r3.jpg' %}" width="100" height="100" alt="yeonjin">
+                                    <p class="pt-2 text-center">김연진</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/khj6165" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/gallery/r5.jpg' %}" width="100" height="100" alt="hyojeong">
+                                    <p class="pt-2 text-center">김효정</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/JuYeong0413" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/footer/juyeong.png' %}" width="100" height="100" alt="juyeong">
+                                    <p class="pt-2 text-center">이주영</p>
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title">Contact Us</h4>
-                        <div class="ml-40">
-                            <p class="sm-head">
-                                <span class="fa fa-location-arrow"></span>
-                                Head Office
-                            </p>
-                            <p>123, Main Street, Your City</p>
-
-                            <p class="sm-head">
-                                <span class="fa fa-phone"></span>
-                                Phone Number
-                            </p>
-                            <p>
-                                +123 456 7890 <br>
-                                +123 456 7890
-                            </p>
-
-                            <p class="sm-head">
-                                <span class="fa fa-envelope"></span>
-                                Email
-                            </p>
-                            <p>
-                                free@infoexample.com <br>
-                                www.infoexample.com
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
