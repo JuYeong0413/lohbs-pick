@@ -25,7 +25,13 @@
                             <li><a href="{% url 'orders:main' %}">Orders</a></li>
                             <li><a href="{% url 'picks:lohbs_pick' %}">Lohb's Pick</a></li>
                             <li><a href="{% url 'picks:shared' %}">Shared</a></li>
-                            <li><a href="#">Mypage</a></li> <!-- TODO(juyeong): #21 merge되면 링크 연결하기 -->
+                            <li>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'users:main' user.id %}">Mypage</a>
+                                {% else %}
+                                    <a href="{{ login_url }}">Mypage</a>
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                 </div>
