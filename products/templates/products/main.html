@@ -3,25 +3,6 @@
 {% load humanize %}
 {% block content %}
 
-	<!-- ================ start banner area ================= -->	
-	<!-- <section class="blog-banner-area" id="category">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>Shop Category</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
-            </ol>
-          </nav>
-				</div>
-			</div>
-    </div>
-	</section> -->
-	<!-- ================ end banner area ================= -->
-
-
 	<!-- ================ category section start ================= -->		  
   <section class="section-margin--small mb-5">
     <div class="container">
@@ -49,23 +30,33 @@
                   </form>
                 </li>
               </ul>
-          </div>
+          </div>`
        
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting mr-auto">
-              <select>
-                <option value="popluar">인기순</option>
-                <option value="lowPrice">낮은 가격순</option>
-                <option value="highPrice">높은 가격순</option>
+              <select id="sort-select" onchange="location = this.value;">
+                {% if "/?sort=lowPrice" in request.get_full_path %}
+                  <option class="sort-popluar" value="?sort=popluar">인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice" selected>낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice">높은 가격순</option>
+                {% elif "/?sort=highPrice" in request.get_full_path %}
+                  <option class="sort-popluar" value="?sort=popluar">인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice">낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice" selected>높은 가격순</option>
+                {% else %}
+                   <option class="sort-popluar" value="?sort=popluar" selected>인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice">낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice">높은 가격순</option>
+                {% endif %}
               </select>
             </div>
             <div>
               <form action="{% url 'products:search' %}">
                 <div class="input-group filter-bar-search">
-                    <input type="text" placeholder="Search" name="query">
+                    <input type="text" placeholder="Search" name="query" >
                     <div class="input-group-append">
                       <button type="submit"><i class="ti-search"></i></button>
                     </div>
@@ -84,7 +75,11 @@
                     <div class="card-product__img">
                       <img class="card-img" src="{{ product.image.url }}" alt="">
                       <ul class="card-product__imgOverlay">
-                        <li><button><i class="fas fa-plus"></i></button></li>
+                        <li>
+                          <button id="idbutton{{ forloop.counter0 }}" type="button" class="button mr-1" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{product.id}}">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </li>
                       </ul>
                     </div>
                     <div class="card-body">
@@ -104,5 +99,20 @@
     </div>
   </section>
 	<!-- ================ category section end ================= -->		  
+
+
+{% include 'products/modal.html' %}
+<script>
+  for(i=0;i<$(`.hard`).length;i++){
+    for(j=0;j<$(`.button`).length-1;j++){
+      var tmp = $(`#idbutton`+j).data('id');
+      var coll = $(`#idp`+i).data('id');
+      var url = "/products/collection_add/"+tmp+"/"+coll;
+      console.log(url);
+    };  
+    $(`#linkCollection`+i).attr("href", url);
+  };
+</script>
+
 
 {% endblock %}
