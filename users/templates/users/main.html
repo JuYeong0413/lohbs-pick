@@ -28,7 +28,7 @@
 				<div class="col-lg-6">
 					<div class="owl-carousel owl-theme s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ user_profile.profile_image.url }}" alt="">
+							<img class="img-fluid" src="{{ user_profile.profile.profile_image.url }}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -40,17 +40,14 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h2>nickname : {{ user_profile.nickname }}</h2>
+						<h3>username: {{ user_profile.username }}</h3>
+						<h2>nickname : {{ user_profile.profile.nickname }}</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Phone</span> : {{ user_profile.phone }}</a></li>
-							<li><a href="#"><span>Address</span> : {{ user_profile.profile_address }}</a></li>
-						</ul>
-						<p>상세 설명(필요시)</p>
-						{% if user.nickname == user_profile.nickname %}
+							<li><a class="active" href="#"><span>Phone</span> : {{ user_profile.profile.phone }}</a></li>
+							<li><a href="#"><span>Address</span> : {{ user_profile.profile.profile_address }}</a></li>
+						</ul><br>
+						{% if user.username == user_profile.username %}
                         <div class="product_count">
-                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="ti-angle-left"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="ti-angle-right"></i></button>
                         <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>
                         {% endif %}               
                         </div>

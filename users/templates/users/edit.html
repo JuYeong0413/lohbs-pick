@@ -24,43 +24,43 @@
 	<section class="product_description_area">
 		<div class="container">
 					<div class="row">
-                        <div class="col-lg-6">
-                            <div class="user-name">
-                                <h4>프로필사진 수정</h4>
-                            </div>
-                            <input type="file" name="profile_image" style="margin:0 auto;">
-                            <label class="mt-10">기본 이미지로 변경하기</label>
-                            <input type="checkbox" name="checkbox" value="1">
-                        </div>
-						<div class="col-lg-6">
-							<div class="review_box">
-								<h4>회원정보 수정</h4>
-								<form class="row contact_form" action="{% url 'users:update' user.pk %}" method="POST" id="contactForm" novalidate="novalidate">
-                                    {% csrf_token %}
+						<div class="review_box">
+							<h4>회원정보 수정</h4>
+							<form class="row contact_form" action="{% url 'users:update' user.pk %}" method="POST" id="contactForm" novalidate="novalidate">
+								{% csrf_token %}
+								<div class="col-lg-6">
+									<div class="user-name">
+										<h4>프로필사진 수정</h4>
+									</div>
+									<input type="file" name="profile_image" style="margin:0 auto;">
+									<label class="mt-10">기본 이미지로 변경하기</label>
+									<input type="checkbox" name="checkbox" value="1">
+								</div>
+								<div class="col-lg-6">
 									<div class="col-md-12">
                                         <label>닉네임</label>
 										<div class="form-group">
-											<input type="text" class="form-control" name="nickname" value="{{ user.nickname }}">
+											<input type="text" class="form-control" name="nickname" value="{{ user.prifile.nickname }}">
 										</div>
 									</div>
 									<div class="col-md-12">
                                         <label>연락처</label>
 										<div class="form-group">
-											<input type="test" class="form-control" name="phone" value="{{ user.phone }}">
+											<input type="test" class="form-control" name="phone" value="{{ user.profile.phone }}">
 										</div>
 									</div>
 									<div class="col-md-12">
                                         <label>주소</label>
 										<div class="form-group">
-											<textarea class="form-control" name="address" rows="2">{{ user.profile_address }}</textarea>
+											<input type="test" class="form-control" name="profile_address" value="{{ user.profile.profile_address }}">
 										</div>
 									</div>
 									<div class="col-md-12 text-right">
 										<button type="submit" value="수정" class="btn primary-btn">수정</button>
 									</div>
-								</form>
-							</div>
-                        </div>
+								</div>
+							</form>
+						</div>
 			        </div>
 		</div>
 	</section>
