@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import *
 
 
@@ -8,6 +9,7 @@ def main(request, id):
     return render(request, 'users/main.html', {'user_profile': user_profile})
 
 # 프로필 수정 페이지
+@login_required
 def edit(request, id):
     current_user = request.user
     user = get_object_or_404(User, pk=id)
@@ -19,6 +21,7 @@ def edit(request, id):
 
 
 # 프로필 수정
+@login_required
 def update(request, id):
     if request.method == "POST":
         user = get_object_or_404(User, pk=id)

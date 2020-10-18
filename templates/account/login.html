@@ -72,7 +72,7 @@
                     </form>
                     <form class="login" method="POST" action="{% url 'account_login' %}" style="display: inline;">
                         {% csrf_token %}
-                        <input type="hidden" name="login" id="username" class="input-md round form-control" value="testuser" required id = "id_login"> 
+                        <input type="hidden" name="login" id="username" class="input-md round form-control" value="testuser" required id="id_login"> 
                         <input type="hidden" name="password" required_id="id_password" class="input-md round form-control" value="testuserpassword" >
                         <button type="submit" class="test">
                             <input type="submit" style="display: none;"><span class="signup-font">테스트 계정 접속</span>
