@@ -34,6 +34,13 @@
 ### 
 
 
+## 개발환경  
+- Python 3.7.3  
+- Django 3.0.6  
+
+## 배포환경  
+- Ubuntu Server 18.04 LTS (HVM)  
+- Nginx 1.14.0  
 
 ## 개발자
 [동국대학교 멋쟁이사자처럼](https://www.facebook.com/DGUlion/)
