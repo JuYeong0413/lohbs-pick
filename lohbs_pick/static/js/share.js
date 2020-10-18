@@ -16,7 +16,7 @@ function filePreview(input) {
                 $(newImage).css('width', '50%');
                 
                 $('#file-content').append(newImage);
-                $('#file-content').addClass('mb-2');
+                $('#file-content').addClass('mb-3');
             }
         };
         reader.readAsDataURL(input.files[0]);
