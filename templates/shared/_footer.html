@@ -6,13 +6,13 @@
             <div class="row section_gap">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title large_title">Our Mission</h4>
+                        <h4 class="footer_title large_title">Our Services</h4>
                         <p>
                             So seed seed green that winged cattle in. Gathering thing made fly you're no 
                             divided deep moved us lan Gathering thing us land years living.
                         </p>
                         <p>
-                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
+                            서비스 설명을 구구절절 써보자... 
                         </p>
                     </div>
                 </div>
@@ -20,12 +20,12 @@
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title">Quick Links</h4>
                         <ul class="list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Brand</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{% url 'main' %}">Home</a></li>
+                            <li><a href="{% url 'products:main' %}">Shop</a></li>
+                            <li><a href="{% url 'orders:main' %}">Orders</a></li>
+                            <li><a href="{% url 'picks:lohbs_pick' %}">Lohb's Pick</a></li>
+                            <li><a href="{% url 'picks:shared' %}">Shared</a></li>
+                            <li><a href="#">Mypage</a></li> <!-- TODO(juyeong): #21 merge되면 링크 연결하기 -->
                         </ul>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
             <div class="row d-flex">
                 <p class="col-lg-12 footer-text text-center">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy; RECORD 2020 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
             </div>
         </div>
