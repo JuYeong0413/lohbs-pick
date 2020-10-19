@@ -1,4 +1,5 @@
 from django.shortcuts import render,get_object_or_404
+from django.db.models import Count
 from .models import Product
 import pdb, collections, json
 from picks.models import Collection
@@ -12,7 +13,7 @@ def main(request):
     elif sort =="highPrice":
         products = Product.objects.all().order_by('-price')
     else:
-        products = Product.objects.all()
+        products = Product.objects.all().annotate(num_cps=Count('collectionproduct')).order_by('-num_cps') 
 
     category_no = collections.defaultdict(int)
     for i in range(0, 11):
@@ -29,7 +30,7 @@ def search(request):
     elif sort =="highPrice":
         search_products = Product.objects.filter(name__contains=query).order_by('-price')
     else:
-        search_products = Product.objects.filter(name__contains=query)
+        search_products = Product.objects.filter(name__contains=query).annotate(num_cps=Count('collectionproduct')).order_by('-num_cps') 
 
     category_no = collections.defaultdict(int)
     for i in range(0, 11):
@@ -47,7 +48,7 @@ def category_list(request):
     elif sort =="highPrice":
         category_lists = Product.objects.filter(category=category).order_by('-price')
     else:
-        category_lists = Product.objects.filter(category=category)
+        category_lists = Product.objects.filter(category=category).annotate(num_cps=Count('collectionproduct')).order_by('-num_cps') 
 
     category_no = collections.defaultdict(int)
     for i in range(0, 11):
