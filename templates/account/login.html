@@ -62,13 +62,13 @@
                     </form>
                     {% get_providers as socialaccount_providers %}
                         {% if socialaccount_providers %}
-                        <div class="socialaccount_ballot">
-                            <ul class="socialaccount_providers">
-                                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                            </ul>
-                        </div>
+                            <div class="socialaccount_ballot">
+                                <ul class="socialaccount_providers">
+                                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                </ul>
+                            </div>
 
-                        {% include "socialaccount/snippets/login_extra.html" %}
+                            {% include "socialaccount/snippets/login_extra.html" %}
                         {% endif %}
                 </div>
             </div>
