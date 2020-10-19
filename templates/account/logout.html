@@ -31,7 +31,7 @@
             <form method="post" action="{% url 'account_logout' %}" style="display:inline-block">
               {% csrf_token %}
               {% if redirect_field_value %}
-              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
               {% endif %}
               <button type="submit" value="submit" class="button button-login">{% trans 'Sign Out' %}</button>
             </form>
