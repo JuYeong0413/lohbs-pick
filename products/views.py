@@ -1,9 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Product
-import collections
-import pdb
+import pdb, collections, json
 from picks.models import Collection
-import json 
 from picks.models import *
 
 def main(request):

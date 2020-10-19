@@ -3,7 +3,25 @@
 {% load humanize %}
 {% block content %}
 
-	<!-- ================ category section start ================= -->		  
+<!-- ================ start banner area ================= -->	
+<section class="blog-banner-area" id="category">
+  <div class="container h-100">
+    <div class="blog-banner">
+      <div class="text-center">
+        <h1>Shop Category</h1>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+<!-- ================ category section start ================= -->		  
   <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -30,7 +48,7 @@
                   </form>
                 </li>
               </ul>
-          </div>`
+          </div>
        
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
@@ -56,7 +74,7 @@
             <div>
               <form action="{% url 'products:search' %}">
                 <div class="input-group filter-bar-search">
-                    <input type="text" placeholder="Search" name="query" >
+                    <input type="text" placeholder="Search" name="query">
                     <div class="input-group-append">
                       <button type="submit"><i class="ti-search"></i></button>
                     </div>
