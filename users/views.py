@@ -35,10 +35,8 @@ def update(request, id):
         if request.POST.get('checkbox'):
             user.profile.profile_image = 'images/default_profile.jpg'
 
-        if user.username == 'testuser':
-            user.profile.nickname = 'testuser'
-        else:
-            user.profile.nickname = nickname
+
+        user.profile.nickname = nickname
         user.profile.phone = phone
         user.profile.profile_address = profile_address
 
