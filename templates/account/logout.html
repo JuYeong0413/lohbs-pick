@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<!-- ================ start banner area ================= -->	
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Logout</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Logout</li>
+        </ol>
+      </nav>
+            </div>
+        </div>
+</div>
+</section>
+<!-- ================ end banner area ================= -->
+<section class="section-margin--small">
+    <div class="container">
+        <div class="check_title" style="text-align:center;">
+            <h2>{% trans 'Are you sure you want to sign out?' %}</h2>
+        </div><br>
+        <div style="text-align:center;">
+            <form method="post" action="{% url 'account_logout' %}" style="display:inline-block">
+              {% csrf_token %}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+              {% endif %}
+              <button type="submit" value="submit" class="button button-login">{% trans 'Sign Out' %}</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
