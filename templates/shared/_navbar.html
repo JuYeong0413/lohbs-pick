@@ -30,7 +30,7 @@
                       aria-expanded="false">Mypage</a>
                     <ul class="dropdown-menu">
                       <li class="nav-item"><a class="nav-link" href="{% url 'users:main' user.id %}">My info</a></li>
-                      <li class="nav-item"><a class="nav-link" href="single-blog.html">Calendar</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{% url 'users:schedule' user.id %}">Schedule</a></li>
                     </ul>
                   </li>
                 {% endif %}

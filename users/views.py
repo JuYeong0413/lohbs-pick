@@ -8,6 +8,10 @@ def main(request, id):
     user_profile = get_object_or_404(User, pk=id)
     return render(request, 'users/main.html', {'user_profile': user_profile})
 
+def schedule(request, id):
+    user = get_object_or_404(User, pk=id)
+    return render(request, 'users/schedule.html', {'user':user})
+
 # 프로필 수정 페이지
 @login_required
 def edit(request, id):
