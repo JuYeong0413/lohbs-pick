@@ -92,13 +92,15 @@
                   <div class="card text-center card-product">
                     <div class="card-product__img">
                       <img class="card-img" src="{{ product.image.url }}" alt="">
-                      <ul class="card-product__imgOverlay">
-                        <li>
-                          <button id="idbutton{{ forloop.counter0 }}" type="button" class="button mr-1" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{product.id}}">
-                            <i class="fas fa-plus"></i>
-                          </button>
-                        </li>
-                      </ul>
+                      {% if user.is_authenticated %}
+                        <ul class="card-product__imgOverlay">
+                          <li>
+                            <button type="button" class="button mr-1 open-AddBookDialog" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{product.id}}">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </li>
+                        </ul>
+                      {% endif %}
                     </div>
                     <div class="card-body">
                       <p>{{ product.brand }}</p>
@@ -118,9 +120,48 @@
   </section>
 	<!-- ================ category section end ================= -->		  
 
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">LOHB's Pick에 담기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container">
+        <div class="modal-body">
+          {% if lists %}
+            {% for collection in lists %} 
+              <!-- <input type="text" name="bookId" id="bookId" value=""/> -->
+              <a id="linkCollection{{ forloop.counter0 }}" href="#"><p class="hard" id="idp{{ forloop.counter0 }}" data-id="{{collection.id}}">{{ collection.name }}</p></a>
+            <br>
+            {% endfor %}
+          {% else %}
+            <p> 아직 롭스픽이 없어요ㅠㅠ 직접 만들어보세요!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Modal -->
 
-{% include 'products/modal.html' %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 <script>
+  $(document).on("click", ".open-AddBookDialog", function () {
+   var myBookId = $(this).data('id');
+   $(".modal-body #bookId").val( myBookId );
+   // As pointed out in comments, 
+   // it is unnecessary to have to manually call the modal.
+   // $('#addBookDialog').modal('show');
+});
+</script>
+  
+<!-- <script>
   for(i=0;i<$(`.hard`).length;i++){
     for(j=0;j<$(`.button`).length-1;j++){
       var tmp = $(`#idbutton`+j).data('id');
@@ -130,7 +171,7 @@
     };  
     $(`#linkCollection`+i).attr("href", url);
   };
-</script>
+</script> -->
 
 
 {% endblock %}
