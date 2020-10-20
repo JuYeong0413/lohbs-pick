@@ -26,8 +26,7 @@
 			  </li>
                 {% if user.is_authenticated %}
                   <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Mypage</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mypage</a>
                     <ul class="dropdown-menu">
                       <li class="nav-item"><a class="nav-link" href="{% url 'users:main' user.id %}">My info</a></li>
                       <li class="nav-item"><a class="nav-link" href="{% url 'users:schedule' user.id %}">Schedule</a></li>

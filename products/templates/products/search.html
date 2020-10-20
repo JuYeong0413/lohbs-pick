@@ -54,10 +54,20 @@
           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
             <div class="sorting mr-auto">
-              <select>
-                <option value="1">인기순</option>
-                <option value="1">낮은 가격순</option>
-                <option value="1">높은 가격순</option>
+              <select id="sort-select" onchange="location = this.value;">
+                {% if "/?sort=lowPrice" in request.get_full_path %}
+                  <option class="sort-popluar" value="?sort=popluar&query={{query}}">인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice" selected>낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice&query={{query}}">높은 가격순</option>
+                {% elif "/?sort=highPrice" in request.get_full_path %}
+                  <option class="sort-popluar" value="?sort=popluar&query={{query}}">인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice&query={{query}}">낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice" selected>높은 가격순</option>
+                {% else %}
+                  <option class="sort-popluar" value="?sort=popluar" selected>인기순</option>
+                  <option class="sort-lowprice" value="?sort=lowPrice&query={{query}}">낮은 가격순</option>
+                  <option class="sort-highprice" value="?sort=highPrice&query={{ query }}">높은 가격순</option>
+                {% endif %}
               </select>
             </div>
             <div>
