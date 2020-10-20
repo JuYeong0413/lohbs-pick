@@ -4,7 +4,7 @@ from products.models import *
 from django.utils.translation import ugettext_lazy as _
 
 class CollectionProduct(models.Model):
-    product = models.OneToOneField(Product, verbose_name=_('상품'), on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name=_('상품'), on_delete=models.CASCADE)
     qunatity = models.PositiveSmallIntegerField(_('수량'))
     sub_total = models.PositiveIntegerField(_('가격'))
     created_at = models.DateTimeField(auto_now_add=True)
