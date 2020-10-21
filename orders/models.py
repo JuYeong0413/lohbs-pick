@@ -5,7 +5,7 @@ from picks.models import *
 from django.utils.translation import ugettext_lazy as _
 
 class OrderProduct(models.Model):
-    product = models.OneToOneField(Product, verbose_name=_('상품'), on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, verbose_name=_('상품'), on_delete=models.SET_NULL, null=True)
     quantity = models.PositiveSmallIntegerField(_('수량'))
     price = models.PositiveIntegerField(_('가격'))
     created_at = models.DateTimeField(auto_now_add=True)
