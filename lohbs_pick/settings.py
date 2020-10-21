@@ -153,3 +153,4 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {'signup': 'users.forms.MyCustomSignupForm'}
+SOCIALACCOUNT_FORMS = {'signup': 'users.forms.MyCustomSocialSignupForm'}
