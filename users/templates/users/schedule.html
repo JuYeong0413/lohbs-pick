@@ -15,9 +15,22 @@
     var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
               
     var today = year + '-' + mon + '-' + day
+    
+    var date = new Date("{{ user.profile.created_at|date:'Y-m-d' }}");
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    
+    
+    for (var i=0, result=[]; i<10; i++)
+    {
+        result.push({"title":"{{ user.profile.nickname }}", "start":new Date(y,m,d), "color":"#ff530f"})
+        d = d+14;//나중에 여기에 주기 변수 넣어주면 됨.
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid' ],
       header: {
@@ -26,46 +39,11 @@
         right: 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       defaultDate: today,
+      displayEventTime: false,
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       eventLimit: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'collect1',
-          start: '2020-10-21',
-          color:'red'
-        },
-        {
-          title: 'collect2',
-          start: '2020-10-21',
-          color:'orange'
-        },
-        {
-          title: 'collect3',
-          start: '2020-10-21',
-          color:'yellow'
-        },
-         {
-          title: 'collect4',
-          start: '2020-10-21',
-          color:'green'
-        },
-        {
-          title: 'collect5',
-          start: '2020-10-21',
-          color:'blue'
-        },
-        {
-          title:'b',
-          start: '2020-10-22',
-          image_url : "{% static 'img/lohbs_stamp' %}",
-        },
-        {
-            title:'a',
-          start: '2020-10-23',
-          image_url : "images/lohbs_stamp.png",
-        },
-      ],
+      events: result,
       eventContent: function(arg) {
                 let arrayOfDomNodes = []
                 // title event
@@ -127,10 +105,7 @@
     </div>
 	</section>
 	<!-- ================ end banner area ================= -->
-    <h1>
-        {{ user.profile.created_at }}에 생성
-        {{ user.profile.nickname }}의 배송일정
-    </h1>
+
 
   <div id='calendar'></div>
 
