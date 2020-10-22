@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aroma Shop - Home</title>
-	<link rel="icon" href="{% static 'img/Fevicon.png' %}" type="image/png">
-  <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
-	<link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/nice-select/nice-select.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
-  <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="내가 필요한 상품을, 나에게 딱 맞는 날짜에! 롭스의 모든 것 LOHB'S PICK!">
+        <title>Lohb's Pick</title>
 
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-	{% include 'shared/_navbar.html' %}
-	
-	{% block content %}
+        <meta property="og:title" content="롭스픽">
+        <meta property="og:url" content="#"><!-- TODO(juyeong): 배포 후 링크 넣기 -->
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Lohb's Pick">
+        <meta property="og:description" content="내가 필요한 상품을, 나에게 딱 맞는 날짜에! 롭스의 모든 것 LOHB'S PICK!">
+        <meta property="og:image" content="https://static.lotteon.com/p/common/assets/favicon/7/metaimg-1000.png">
 
-	{% endblock %}
-	
-	{% include 'shared/_footer.html' %}
+        <!-- Favicon -->
+        <link rel="icon" sizes="32x32" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-32.png">
+        <link rel="icon" sizes="57x57" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-57.png">
+        <link rel="icon" sizes="76x76" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-76.png">
+        <link rel="icon" sizes="96x96" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-96.png">
+        <link rel="icon" sizes="128x128" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-128.png">
+        <link rel="icon" sizes="192x192" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-192.png">
+        <link rel="icon" sizes="228x228" href="https://static.lotteon.com/p/common/assets/favicon/7/favicon-228.png">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/nice-select/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% include 'shared/_navbar.html' %}
+        
+        {% block content %}
+
+        {% endblock %}
+        
+        {% include 'shared/_footer.html' %}
 
 
-  <script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
-  <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'vendors/skrollr.min.js' %}"></script>
-  <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendors/nice-select/jquery.nice-select.min.js' %}"></script>
-  <script src="{% static 'vendors/jquery.ajaxchimp.min.js' %}"></script>
-  <script src="{% static 'vendors/mail-script.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-</body>
+        <script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'vendors/skrollr.min.js' %}"></script>
+        <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'vendors/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'vendors/mail-script.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
 </html>

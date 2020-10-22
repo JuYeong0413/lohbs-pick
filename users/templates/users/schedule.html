@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link href="{% static 'packages/core/main.css' %}"rel='stylesheet' />
+<link href="{% static 'packages/daygrid/main.css' %}" rel='stylesheet' />
+<script src="{% static 'packages/core/main.js' %}"></script>
+<script src="{% static 'packages/interaction/main.js' %}"></script>
+<script src="{% static 'packages/daygrid/main.js' %}"></script>
+<script>
+    var now = new Date();
+
+    var year= now.getFullYear();
+    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+              
+    var today = year + '-' + mon + '-' + day
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid' ],
+      header: {
+        left: 'prevYear,prev,next,nextYear today',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      },
+      defaultDate: today,
+      navLinks: true, // can click day/week names to navigate views
+      editable: false,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'collect1',
+          start: '2020-10-21',
+          color:'red'
+        },
+        {
+          title: 'collect2',
+          start: '2020-10-21',
+          color:'orange'
+        },
+        {
+          title: 'collect3',
+          start: '2020-10-21',
+          color:'yellow'
+        },
+         {
+          title: 'collect4',
+          start: '2020-10-21',
+          color:'green'
+        },
+        {
+          title: 'collect5',
+          start: '2020-10-21',
+          color:'blue'
+        },
+        {
+          title:'b',
+          start: '2020-10-22',
+          image_url : "{% static 'img/lohbs_stamp' %}",
+        },
+        {
+            title:'a',
+          start: '2020-10-23',
+          image_url : "images/lohbs_stamp.png",
+        },
+      ],
+      eventContent: function(arg) {
+                let arrayOfDomNodes = []
+                // title event
+                let titleEvent = document.createElement('div')
+                if(arg.event._def.title) {
+                  titleEvent.innerHTML = arg.event._def.title
+                  titleEvent.classList = "fc-event-title fc-sticky"
+                }
+    
+                // image event
+                let imgEventWrap = document.createElement('div')
+                if(arg.event.extendedProps.image_url) {
+                  let imgEvent = '<img src="'+arg.event.extendedProps.image_url+'" >'
+                  imgEventWrap.classList = "fc-event-img"
+                  imgEventWrap.innerHTML = imgEvent;
+                }
+    
+                arrayOfDomNodes = [ titleEvent,imgEventWrap ]
+    
+                return { domNodes: arrayOfDomNodes }
+              },
+    });
+
+    calendar.render();
+  });
+
+</script>
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="blog">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Schedule</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">schedule</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+    <h1>
+        {{ user.profile.created_at }}에 생성
+        {{ user.profile.nickname }}의 배송일정
+    </h1>
+
+  <div id='calendar'></div>
+
+</body>
+{% endblock %}

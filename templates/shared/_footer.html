@@ -1,4 +1,16 @@
 {% load static %}
+
+<style>
+    .developers-name {
+        color: #7b838a;
+        font-family: "Roboto",sans-serif;
+    }
+
+    .developers-name:hover {
+        color: #384aeb;
+    }
+</style>
+
 <!--================ Start footer Area  =================-->	
 <footer class="footer">
     <div class="footer-area">
@@ -6,13 +18,13 @@
             <div class="row section_gap">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title large_title">Our Mission</h4>
+                        <h4 class="footer_title large_title">Our Services</h4>
                         <p>
                             So seed seed green that winged cattle in. Gathering thing made fly you're no 
                             divided deep moved us lan Gathering thing us land years living.
                         </p>
                         <p>
-                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
+                            서비스 설명을 구구절절 써보자... 
                         </p>
                     </div>
                 </div>
@@ -20,56 +32,44 @@
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title">Quick Links</h4>
                         <ul class="list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Brand</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{% url 'main' %}">Home</a></li>
+                            <li><a href="{% url 'products:main' %}">Shop</a></li>
+                            <li><a href="{% url 'orders:main' %}">Orders</a></li>
+                            <li><a href="{% url 'picks:lohbs_pick' %}">Lohb's Pick</a></li>
+                            <li><a href="{% url 'picks:shared' %}">Shared</a></li>
+                            <li>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'users:main' user.id %}">Mypage</a>
+                                {% else %}
+                                    <a href="{{ login_url }}">Mypage</a>
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="single-footer-widget instafeed">
-                        <h4 class="footer_title">Gallery</h4>
+                        <h4 class="footer_title">Developers</h4>
                         <ul class="list instafeed d-flex flex-wrap">
-                            <li><img src="{% static 'img/gallery/r1.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r2.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r3.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r5.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r7.jpg' %}" alt=""></li>
-                            <li><img src="{% static 'img/gallery/r8.jpg' %}" alt=""></li>
+                            <li>
+                                <a href="https://github.com/ygk13" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/gallery/r3.jpg' %}" width="100" height="100" alt="yeonjin">
+                                    <p class="pt-2 text-center">김연진</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/khj6165" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/gallery/r5.jpg' %}" width="100" height="100" alt="hyojeong">
+                                    <p class="pt-2 text-center">김효정</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/JuYeong0413" target="_blank" class="developers-name">
+                                    <img src="{% static 'img/footer/juyeong.png' %}" width="100" height="100" alt="juyeong">
+                                    <p class="pt-2 text-center">이주영</p>
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-footer-widget tp_widgets">
-                        <h4 class="footer_title">Contact Us</h4>
-                        <div class="ml-40">
-                            <p class="sm-head">
-                                <span class="fa fa-location-arrow"></span>
-                                Head Office
-                            </p>
-                            <p>123, Main Street, Your City</p>
-
-                            <p class="sm-head">
-                                <span class="fa fa-phone"></span>
-                                Phone Number
-                            </p>
-                            <p>
-                                +123 456 7890 <br>
-                                +123 456 7890
-                            </p>
-
-                            <p class="sm-head">
-                                <span class="fa fa-envelope"></span>
-                                Email
-                            </p>
-                            <p>
-                                free@infoexample.com <br>
-                                www.infoexample.com
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <div class="row d-flex">
                 <p class="col-lg-12 footer-text text-center">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy; RECORD 2020 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
             </div>
         </div>

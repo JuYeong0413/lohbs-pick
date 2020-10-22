@@ -1,5 +1,217 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <!-- 공유된 롭스픽 메인 페이지(목록) -->
+    <!-- 공유된 롭스픽 메인 페이지(목록) -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/pick-shared.css' %}"> <!-- 수정한 CSS -->
+    <link rel="stylesheet" href="{% static 'css/rhythm/style-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rhythm/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rhythm/vertical-rhythm.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rhythm/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rhythm/magnific-popup.css' %}">
+    <!-- End CSS -->
+
+    <!-- ================ start banner area ================= -->	
+    <section class="blog-banner-area" id="category">
+        <div class="container h-100">
+            <div class="blog-banner">
+                <div class="text-center">
+                    <h1>Shared Lohb's Pick</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'main' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shared</li>
+                    </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+
+    <!-- Section -->
+    <section class="section-margin calc-60px">
+        <div class="container relative">            
+            <div class="row multi-columns-row">
+            
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">New Web Design Trends</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 10 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+                      
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">Minimalistic Design Forever</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 9 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+                      
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">Hipster&rsquo;s Style in&nbsp;Web</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 7 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+                      
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">Duis tristique condimentum</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 7 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+                      
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">New Web Design Trends</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 10 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+                
+                <!-- Post Item -->
+                <div class="col-sm-6 col-md-4 col-lg-4 mb-60 mb-xs-40">
+                    
+                    <div class="post-prev-img">
+                        <a href="blog-single-sidebar-right.html"><img src="{% static 'img/rhythm/post-prev-1.jpg' %}" alt="" /></a>
+                    </div>
+                    
+                    <div class="post-prev-title font-alt">
+                        <a href="">Minimalistic Design Forever</a>
+                    </div>
+                    
+                    <div class="post-prev-info font-alt">
+                        <a href="">John Doe</a> | 9 December
+                    </div>
+                    
+                    <div class="post-prev-text">
+                        Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
+                        consectetur fermentum nibh volutpat, accumsan purus. 
+                    </div>
+                    
+                    <div class="post-prev-more">
+                        <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    
+                </div>
+                <!-- End Post Item -->
+
+                      
+            </div>
+                  
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href=""><i class="fa fa-angle-left"></i></a>
+                <a href="" class="active">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a class="no-active">...</a>
+                <a href="">9</a>
+                <a href=""><i class="fa fa-angle-right"></i></a>
+            </div>
+            <!-- End Pagination -->
+
+        </div>
+    </section>
+    <!-- End Section -->
 {% endblock %}

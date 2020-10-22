@@ -1,5 +1,95 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <!-- 롭스픽 공유글 작성 페이지 -->
+    <!-- 롭스픽 공유글 작성 페이지 -->
+    <style>
+        .td-last {
+            border-bottom: 1px solid #dee2e6;
+        }
+    </style>
+
+    <!-- ================ start banner area ================= -->	
+    <section class="blog-banner-area" id="category">
+      <div class="container h-100">
+        <div class="blog-banner">
+          <div class="text-center">
+            <h1>Share My Lohb's Pick</h1>
+            <nav aria-label="breadcrumb" class="banner-breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Share</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================ end banner area ================= -->
+
+    <!--================ Share Area =================-->
+    <section class="checkout_area section-margin--small">
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Collection Information</h3>
+                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="zip" name="zip" value="컬렉션 이름 들어갈 자리" disabled>
+                            </div>
+                            <div class="col-md-12 table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span>상품1</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>상품2</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>상품3</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="td-last">
+                                                <span>상품4</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12 form-group mb-0">
+                                <div class="creat_account" id="file-content">
+                                    <h3>How was your collection?</h3>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" onchange="filePreview(this)">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <img src="data:," style="width: 50%" id="show-image-tag" alt>
+                                <textarea class="form-control" name="message" id="message" rows="1" placeholder="컬렉션에 대한 후기를 작성해 주세요!"></textarea>
+                            </div>
+                            <div class="form-group text-center text-md-right mt-3">
+                                <button type="submit" class="button button--active button-review">등록하기</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ End Share Area =================-->
+
+    <script src="{% static 'js/share.js' %}"></script>
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+          });
+    </script>
 {% endblock %}
