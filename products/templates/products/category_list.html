@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 
 	<!-- ================ start banner area ================= -->	
-	<!-- <section class="blog-banner-area" id="category">
+	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
@@ -18,7 +18,7 @@
 				</div>
 			</div>
     </div>
-	</section> -->
+	</section>
 	<!-- ================ end banner area ================= -->
 
 
@@ -92,13 +92,15 @@
                     <div class="card-product__img">
                       <img class="card-img" src="{{ product.image.url }}" alt="">
                       <ul class="card-product__imgOverlay">
-                        <li><button><i class="fas fa-plus"></i></button></li>
+                        <button id="btnid" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter0 }}">
+                          <i class="fas fa-plus"></i>
+                      </button>
                       </ul>
                     </div>
                     <div class="card-body">
                       <p>{{ product.brand }}</p>
                       <h6 class="card-product__title">{{ product.name }}</h6>
-                      <p class="card-product__price" style="display: inline;">{{ product.price }}</p>
+                      <p class="card-product__price" style="display: inline;">{{ product.price| intcomma }}</p>
                       <p style="display:inline; font-size:14px;">원</p>
                     </div>
                   </div>
@@ -113,7 +115,36 @@
   </section>
   <!-- ================ category section end ================= -->		  
   
-
+<!-- Modal -->
+  {% for product in products %}
+  <div class="modal fade" id="exampleModalCenter{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">롭스픽 선택하기</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'picks:create_cp' product.id %}" method="POST" id="formcreate">
+          <div class="modal-body">
+                  {% csrf_token %}
+                  <label>수량:&nbsp;</label>
+                  <input type="number" name="quantity" min=1 style="width:10%;">
+                  <br>
+                  {% for pick in lists %}
+                    <input type="radio" name="pick" value="{{pick.id}}">{{pick.name}}<br>
+                  {% endfor %}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">저장</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+<!-- Modal -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   <script>

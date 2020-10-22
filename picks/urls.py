@@ -4,6 +4,12 @@ from . import views
 app_name ="picks"
 urlpatterns = [
     path('lohbs_pick/', views.lohbs_pick, name="lohbs_pick"),
+    path('create/', views.create, name="create"),
+    path('delete/<int:collection_id>/', views.delete, name="delete"),
+    path('delete_cp/<int:cp_id>/<int:collection_id>/', views.delete_cp, name="delete_cp"),
+    path('collection_add/', views.collection_add, name="collection_add"),
+    path('create_cp/<int:product_id>/', views.create_cp, name="create_cp"),
+
     ## 공유 관련
     path('shared/', views.shared, name="shared"),
     path('share/', views.share_new, name="share_new"),
