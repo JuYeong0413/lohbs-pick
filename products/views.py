@@ -18,8 +18,12 @@ def main(request):
     category_no = collections.defaultdict(int)
     for i in range(0, 11):
         category_no[str(i)] = len(Product.objects.filter(category=i))
-    lists = Collection.objects.filter(user=request.user)
-    return render(request, 'products/main.html', {'products':products, 'category_no':category_no, 'lists':lists})
+
+    if request.user.is_active:
+        lists = Collection.objects.filter(user=request.user)
+        return render(request, 'products/main.html', {'products':products, 'category_no':category_no, 'lists':lists})
+
+    return render(request, 'products/main.html', {'products':products, 'category_no':category_no})
 
 def search(request):
     sort = request.GET.get('sort', '')
@@ -35,6 +39,10 @@ def search(request):
     category_no = collections.defaultdict(int)
     for i in range(0, 11):
         category_no[str(i)] = len(Product.objects.filter(category=i))
+    
+    if request.user.is_active:
+        lists = Collection.objects.filter(user=request.user)
+        return render(request, 'products/search.html', {'search_products':search_products, 'query':query, 'category_no':category_no, 'lists':lists})
     
     return render(request, 'products/search.html', {'search_products':search_products, 'query':query, 'category_no':category_no})
 
@@ -54,18 +62,8 @@ def category_list(request):
     for i in range(0, 11):
         category_no[str(i)] = len(Product.objects.filter(category=i))
     
+    if request.user.is_active:
+        lists = Collection.objects.filter(user=request.user)
+        return render(request, 'products/category_list.html', {'category_lists':category_lists, 'output':category, 'category_no':category_no, 'lists':lists})
+    
     return render(request, 'products/category_list.html', {'category_lists':category_lists, 'output':category, 'category_no':category_no})
-
-# def collection_add(request, product_id, collection_id):
-#     lohbs_pick = get_object_or_404(Collection, pk=collection_id)
-#     product = get_object_or_404(Product, pk=product_id)
-
-#     quantity = 1 
-#     collection_product = CollectionProduct.objects.create(product=product, qunatity=quantity)
-#     lohbs_pick.collection_products.add(collection_product)
-#     lohbs_pick.collection_total += collection_product.sub_total
-#     lohbs_pick.save()
-    
-#     picks = Collection.objects.all()
-#     return render(request, 'picks/lohbs_pick.html', {'picks':picks})
-    
