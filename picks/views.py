@@ -52,7 +52,7 @@ def create_cp(request, product_id):
                     collection.collection_products.remove(collection_product)
                     collection.collection_total -= collection_product.sub_total
                     
-        cp = CollectionProduct.objects.create(product=product, qunatity=quantity)        
+        cp = CollectionProduct.objects.create(product=product, quantity=quantity)        
         collection.collection_products.add(cp)
         collection.collection_total += cp.sub_total
         collection.save()
@@ -68,6 +68,8 @@ def shared(request):
 
 # 롭스픽 공유글 작성 페이지
 def share_new(request):
+    if request.user == collection.user:
+        return render(request, 'picks/share_new.html', {''})
     return render(request, 'picks/share_new.html')
 
 
