@@ -92,13 +92,13 @@
                   <div class="card text-center card-product">
                     <div class="card-product__img">
                       <img class="card-img" src="{{ product.image.url }}" alt="">
-                      <ul class="card-product__imgOverlay">
-                        <li>
-                          <button id="idbutton{{ forloop.counter0 }}" type="button" class="button mr-1" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{product.id}}">
-                            <i class="fas fa-plus"></i>
-                          </button>
-                        </li>
-                      </ul>
+                        <ul class="card-product__imgOverlay">
+                            <li>
+                              <button id="btnid" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter0 }}">
+                                <i class="fas fa-plus"></i>
+                              </button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
                       <p>{{ product.brand }}</p>
@@ -116,21 +116,47 @@
       </div>
     </div>
   </section>
-	<!-- ================ category section end ================= -->		  
-
-
-{% include 'products/modal.html' %}
-<script>
-  for(i=0;i<$(`.hard`).length;i++){
-    for(j=0;j<$(`.button`).length-1;j++){
-      var tmp = $(`#idbutton`+j).data('id');
-      var coll = $(`#idp`+i).data('id');
-      var url = "/products/collection_add/"+tmp+"/"+coll;
-      console.log(url);
-    };  
-    $(`#linkCollection`+i).attr("href", url);
-  };
-</script>
-
+  <!-- ================ category section end ================= -->		  
+  
+  {% for product in products %}
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">롭스픽 선택하기</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="{% url 'picks:create_cp' product.id %}" method="POST">
+              <div class="modal-body">
+                {% csrf_token %}
+                <div class="mb-2 container">
+                  <label>수량:&nbsp;</label>
+                  <div class="product_count">
+                    <input type="text" name="quantity" id="sst{{ forloop.counter0 }}" maxlength="12" value="1" title="Quantity:" class="input-text qty" style="width:50px;height:30px;">
+                    <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} )) result.value++;return false;" class="increase items-count" type="button"><i class="fas fa-chevron-up"></i></button>
+                    <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} ) &amp;&amp; sst{{ forloop.counter0 }} > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fas fa-chevron-down"></i></button>
+                  </div>
+                </div>
+                <div class="container">
+                  <label><strong><컬렉션 목록></strong></label>
+                  <br>
+                  <!-- <input class="pixel-radio" type="radio" name="new"> 새 컬렉션 만들기 -->
+                  {% for pick in lists %}
+                    <input class="pixel-radio" type="radio" name="pick" value="{{pick.id}}" style="margin-right:5px;">{{pick.name}}<br>
+                  {% endfor %}
+                    <input class="pixel-radio" type="radio" name="pick" style="margin-right:5px;" value="new">새로운 컬렉션 생성:&nbsp; <input type="text" name="collection_name">
+                </div>
+              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">저장</button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 
 {% endblock %}
