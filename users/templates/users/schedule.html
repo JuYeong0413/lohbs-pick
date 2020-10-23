@@ -24,8 +24,9 @@
     
     for (var i=0, result=[]; i<10; i++)
     {
-        result.push({"title":"{{ user.profile.nickname }}", "start":new Date(y,m,d), "color":"#ff530f"})
-        d = d+14;//나중에 여기에 주기 변수 넣어주면 됨.
+        result.push({"title":"{{ user.profile.nickname }}", "start":new Date(y,m,d), "textColor": "white", "color":"#ff530f"})
+        d = d+14; // TODO: 나중에 여기에 주기 변수 넣어주면 됨.
+		// TODO : 사용자의 컬렉션에서 주기 가져오기. 사용자의 오더에서 오더한 컬렉션 이름과 생성날짜 가져와서 이중for문 돌리기.
     }
     
     document.addEventListener('DOMContentLoaded', function() {
