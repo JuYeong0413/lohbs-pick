@@ -11,7 +11,7 @@ urlpatterns = [
 
     ## 공유 관련
     path('shared/', views.shared, name="shared"),
-    path('share/', views.share_new, name="share_new"),
+    path('<int:collection_id>/share/', views.share_new, name="share_new"),
     path('create/', views.share_create, name="share_create"),
     path('<int:id>/edit/', views.share_edit, name="share_edit"),
     path('<int:id>/update/', views.share_update, name="share_update"),
