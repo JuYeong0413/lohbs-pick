@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="{% static 'css/rhythm/vertical-rhythm.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/rhythm/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <style>
+      .button-shared-main {
+          display: inline-block;
+          border: 1px solid #ff530f !important;
+          background-color: #ff530f;
+          border-radius: 0;
+          color: #fff;
+          font-weight: 500;
+          padding: 3px 10px;
+          transition: all .4s ease;
+      }
+    </style>
     <!-- End CSS -->
 
     <!-- ================ start banner area ================= -->	
@@ -43,10 +56,6 @@
                         
                         <div class="post-prev-title font-alt">
                             <span>{{ post.collection_name }}</span>
-                            {% if user == post.user %}
-                                <a href="{% url 'picks:share_edit' post.id %}">수정</a>
-                                <a href="{% url 'picks:share_delete' post.id %}">삭제</a>
-                            {% endif %}
                         </div>
                         
                         <div class="post-prev-info font-alt">
@@ -65,6 +74,14 @@
                         {% else %}
                             <div class="post-prev-text">
                               {{ post.content }}
+                            </div>
+                        {% endif %}
+
+                        <!-- 수정, 삭제버튼 -->
+                        {% if user == post.user %}
+                            <div class="text-right">
+                                <a href="{% url 'picks:share_edit' post.id %}" class="button button--active button-shared-main">수정</a>
+                                <a href="{% url 'picks:share_delete' post.id %}" class="button button--active button-shared-main">삭제</a>
                             </div>
                         {% endif %}
                     </div>
