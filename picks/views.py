@@ -87,14 +87,21 @@ def share_new(request, collection_id):
 # 롭스픽 공유글 생성
 @login_required
 def share_create(request):
+    products_list = []
     user = request.user
     if request.method == "POST":
-        # pdb.set_trace()
+        c_id = request.POST.get('collection_id')
+        collection = get_object_or_404(Collection, pk=c_id)
+        c_products = collection.collection_products.all()
+        for cp in c_products:
+            p = cp.product
+            p_str = f"[{p.brand}] {p.name}"
+            products_list.append(p_str)
+
         content = request.POST.get('content')
         collection_name = request.POST.get('collection_name')
         image = request.FILES.get('image')
-        products = 'aaa, b, c'
-        # products = request.POST.get('')
+        products = ', '.join(products_list)
 
         Share.objects.create(user=user, image=image, content=content, collection_name=collection_name, collection_products=products)
     return redirect('picks:shared')
