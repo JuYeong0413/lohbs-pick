@@ -105,7 +105,14 @@ def share_create(request):
 def share_edit(request, id):
     share = get_object_or_404(Share, pk=id)
     if request.user == share.user:
-        return render(request, 'picks/share_edit.html', {'share': share})
+        products = share.collection_products
+        products_list = products.split(', ')
+
+        context = {
+          'share': share,
+          'products': products_list
+        }
+        return render(request, 'picks/share_edit.html', context)
     return redirect('picks:shared')
 
 
