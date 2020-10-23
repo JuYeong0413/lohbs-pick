@@ -43,6 +43,10 @@
                         
                         <div class="post-prev-title font-alt">
                             <span>{{ post.collection_name }}</span>
+                            {% if user == post.user %}
+                                <a href="{% url 'picks:share_edit' post.id %}">수정</a>
+                                <a href="{% url 'picks:share_delete' post.id %}">삭제</a>
+                            {% endif %}
                         </div>
                         
                         <div class="post-prev-info font-alt">
