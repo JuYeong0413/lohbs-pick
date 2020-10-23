@@ -15,7 +15,7 @@ class CollectionProduct(models.Model):
         verbose_name_plural='컬렉션상품'
 
     def save(self, *args, **kwargs):
-        self.sub_total = self.product.price*self.qunatity
+        self.sub_total = self.product.price*self.quantity
         super().save(*args, **kwargs)
 
 
