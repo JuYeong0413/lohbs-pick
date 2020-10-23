@@ -35,7 +35,7 @@
                         <h3>Collection Information</h3>
                         <form class="row contact_form" action="{% url 'picks:share_create' %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="hidden" name="collection_id" value="collection_id">
+                            <input type="hidden" name="collection_id" value="{{ collection_id }}">
                             <div class="col-md-12 form-group">
                                 <input type="text" class="form-control" id="zip" name="collection_name" value="{{ collection_name }}" readonly>
                             </div>
@@ -76,4 +76,10 @@
     <!--================ End Share Area =================-->
 
     <script src="{% static 'js/share.js' %}"></script>
+    <script>
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
 {% endblock %}
