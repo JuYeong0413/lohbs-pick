@@ -1,3 +1,4 @@
+// share new & edit
 function filePreview(input) {
     if (input.files && input.files[0]) {
         let reader = new FileReader();
@@ -21,4 +22,26 @@ function filePreview(input) {
         };
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+$(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+// share main page
+function readMore() {
+  var dots = document.getElementById('dots');
+  var moreText = document.getElementById('more');
+  var btnText = document.getElementById('readMoreBtn');
+
+  if (dots.style.display === 'none') {
+    dots.style.display = 'inline';
+    btnText.innerHTML = 'Read More  <i class="fa fa-angle-right">';
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = 'none';
+    btnText.innerHTML = 'Read less';
+    moreText.style.display = 'inline';
+  }
 }
