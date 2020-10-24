@@ -124,7 +124,7 @@
                                               <img src="{{ p.product.image.url }}" alt="" width="100">
                                           </div>
                                           <div class="media-body">
-                                              <p>{{ p.product.name }}</p>
+                                              <p>[{{ p.product.brand }}] {{ p.product.name }}</p>
                                           </div>
                                       </div>
                                   </td>
@@ -133,7 +133,7 @@
                                   </td>
                                   <td>
                                       <div class="product_count">
-                                          <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" readonly>
+                                          <input type="text" name="qty" id="sst" maxlength="12" value="{{ p.quantity }}" title="Quantity:" class="input-text qty" readonly>
                                       </div>
                                   </td>
                                   <td>
