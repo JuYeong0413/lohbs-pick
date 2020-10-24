@@ -12,6 +12,10 @@ class Profile(models.Model):
     profile_image = models.ImageField(_('프로필 이미지'), upload_to="profile_images/", default="images/default_profile.jpg")
     profile_address = models.CharField(_('프로필 주소'), max_length=300)
     phone = models.CharField(_('연락처'), max_length=20)
+    address1 = models.CharField(_('주소1'), max_length=300)
+    address2 = models.CharField(_('주소2 참고항목'), max_length=300)
+    detail_address = models.CharField(_('상세주소'), max_length=300)
+    zipcode = models.CharField(_('우편번호'), max_length=5)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

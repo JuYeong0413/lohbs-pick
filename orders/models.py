@@ -14,15 +14,22 @@ class OrderProduct(models.Model):
     class Meta:
         verbose_name='주문상품'
         verbose_name_plural='주문상품'
+    
+    def save(self, *args, **kwargs):
+        self.price = self.product.price*self.quantity
+        super().save(*args, **kwargs)
 
 
 class Order(models.Model):
     user = models.ForeignKey(User, verbose_name=_('사용자'), on_delete=models.CASCADE)
     order_total = models.PositiveIntegerField(_('총 가격'))
-    address = models.CharField(_('배송지 주소'), max_length=300)
+    address = models.CharField(_('배송지 주소'), max_length=300)                    
     collection = models.ForeignKey(Collection, verbose_name=_('컬렉션'), on_delete=models.SET_NULL, null=True)
     collection_name = models.CharField(_('컬렉션명'), max_length=100)
     order_products = models.ManyToManyField(OrderProduct, verbose_name=_('주문상품'), related_name="order_products", through="Ordering")
+    recipient = models.CharField(_('받는 사람'), max_length=10)
+    recipient_phone = models.CharField(_('수령인 연락처'), max_length=15)
+    delivery_message = models.TextField(_('배송 요청사항'), blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
