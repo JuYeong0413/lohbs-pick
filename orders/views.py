@@ -80,7 +80,9 @@ def create(request):
             order.save()
 
             selected = request.POST.get("save-address", None)
-            if selected in 'save_address':
+            if selected == None:
+                return redirect('orders:main')
+            elif selected in 'save_address':
                 user.profile.address1 = address1
                 user.profile.address2 = address2
                 user.profile.detail_address = detail_address
