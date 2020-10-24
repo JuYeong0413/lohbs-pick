@@ -110,8 +110,8 @@
                 </div>
                 <div class="card-body">
                   <h4 class="card-blog__title"><a href="single-blog.html">{{ share.collection_name }}</a></h4>
-                  <span>{{ post.user.username|slice:":4" }}****</span> | {{ post.created_at|date:"Y.m.d"}}
-                  <p>{{ post.content|slice:":30" }}...</p>
+                  <span>{{ share.user.username|slice:":4" }}****</span> | {{ share.created_at|date:"Y.m.d"}}
+                  <p>{{ share.content|slice:":30" }}...</p>
                   <a class="card-blog__link" href="{% url 'picks:shared' %}">Read More <i class="ti-arrow-right"></i></a>
                 </div>
               </div>
