@@ -1,7 +1,70 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
   <!-- 주문하기 페이지 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    function sub(){
+      a=document.form.a.value;
+      b=document.form.b.value;
+      c=document.form.c.value;
+      d=document.form.d.value;
+      e=a+" "+b+c+d;
+      document.form.profile_address.value=e;
+
+      document.form.submit();
+    }
+    
+      function sample6_execDaumPostcode() {
+          new daum.Postcode({
+              oncomplete: function(data) {
+                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                  // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                  var addr = ''; // 주소 변수
+                  var extraAddr = ''; // 참고항목 변수
+
+                  //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                  if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                      addr = data.roadAddress;
+                  } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                      addr = data.jibunAddress;
+                  }
+
+                  // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                  if(data.userSelectedType === 'R'){
+                      // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                      // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                      if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                          extraAddr += data.bname;
+                      }
+                      // 건물명이 있고, 공동주택일 경우 추가한다.
+                      if(data.buildingName !== '' && data.apartment === 'Y'){
+                          extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                      }
+                      // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                      if(extraAddr !== ''){
+                          extraAddr = ' (' + extraAddr + ')';
+                      }
+                      // 조합된 참고항목을 해당 필드에 넣는다.
+                      document.getElementById("sample6_extraAddress").value = extraAddr;
+                  
+                  } else {
+                      document.getElementById("sample6_extraAddress").value = '';
+                  }
+
+                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                  document.getElementById('sample6_postcode').value = data.zonecode;
+                  document.getElementById("sample6_address").value = addr;
+                  // 커서를 상세주소 필드로 이동한다.
+                  document.getElementById("sample6_detailAddress").value = '';
+                  document.getElementById("sample6_detailAddress").focus();
+              }
+          }).open();
+      }
+  </script>
 
   <!-- ================ start banner area ================= -->	
   <section class="blog-banner-area" id="category">
@@ -22,157 +85,171 @@
   <!-- ================ end banner area ================= -->
 
 
-  <!--================Checkout Area =================-->
+  <!--================ Share Area =================-->
+  <section class="checkout_area section-margin--small">
+      <div class="container">
+          <div class="billing_details">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h3>Collection Information</h3>
+                          <div class="col-md-12 form-group">
+                              <input type="text" class="form-control" id="zip" name="collection_name" value="{{ collection_name }}" readonly>
+                          </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!--================ End Share Area =================-->
+
+    <!--================Cart Area =================-->
+      <div class="container">
+          <div class="cart_inner">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Quantity</th>
+                              <th scope="col">Total</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for p in collection_products %}
+                              <tr>
+                                  <td>
+                                      <div class="media">
+                                          <div class="d-flex">
+                                              <img src="{{ p.product.image.url }}" alt="" width="100">
+                                          </div>
+                                          <div class="media-body">
+                                              <p>{{ p.product.name }}</p>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <h5>{{ p.product.price | intcomma }}원</h5>
+                                  </td>
+                                  <td>
+                                      <div class="product_count">
+                                          <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty" readonly>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      <h5>{{ p.sub_total | intcomma }}원</h5>
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                          <tr class="bottom_button">
+                              <td>
+
+                              </td>
+                              <td>
+
+                              </td>
+                              <td>
+
+                              </td>
+                              <td>
+                                  <div class="cupon_text d-flex align-items-center">
+                                      <input type="text" placeholder="쿠폰 코드 입력...">
+                                      <a class="primary-btn" href="#">적용하기</a>
+                                      <!-- <a class="button" href="#">Have a Coupon?</a> -->
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+
+                              </td>
+                              <td>
+
+                              </td>
+                              <td>
+                                  <h5>총 상품금액</h5>
+                              </td>
+                              <td>
+                                  <h5>{{ product_total_price | intcomma }}원</h5>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+
+  <!--================End Cart Area =================-->
+
+  <!-- ================ Checkout Area ================= -->
   <section class="checkout_area section-margin--small">
     <div class="container">
-        <div class="returning_customer">
-            <div class="check_title">
-                <h2>Returning Customer? <a href="#">Click here to login</a></h2>
-            </div>
-            <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new
-                customer, please proceed to the Billing & Shipping section.</p>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" placeholder="Username or Email*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Username or Email*'" id="name" name="name">
-                    <!-- <span class="placeholder" data-placeholder="Username or Email"></span> -->
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="password" class="form-control" placeholder="Password*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password*'" id="password" name="password">
-                    <!-- <span class="placeholder" data-placeholder="Password"></span> -->
-                </div>
-                <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="button button-login">login</button>
-                    <div class="creat_account">
-                        <input type="checkbox" id="f-option" name="selector">
-                        <label for="f-option">Remember me</label>
-                    </div>
-                    <a class="lost_pass" href="#">Lost your password?</a>
-                </div>
-            </form>
-        </div>
-        <div class="cupon_area">
-            <div class="check_title">
-                <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2>
-            </div>
-            <input type="text" placeholder="Enter coupon code">
-            <a class="button button-coupon" href="#">Apply Coupon</a>
-        </div>
+      <form class="row contact_form" action="{% url 'orders:create' %}" method="POST">
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Billing Details</h3>
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="First name"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Last name"></span>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="company" name="company" placeholder="Company name">
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Phone number"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Email Address"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Country</option>
-                                <option value="2">Country</option>
-                                <option value="4">Country</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Address line 01"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add2" name="add2">
-                            <span class="placeholder" data-placeholder="Address line 02"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">District</option>
-                                <option value="2">District</option>
-                                <option value="4">District</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
-                        </div>
+                        {% csrf_token %}
+                        <input type="hidden" name="collection_id" value="{{ collection_id }}">
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Create an account?</label>
+                                <h3>Delivery Details</h3>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="recipient_name" value="{{ name }}" placeholder="수령인">
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" name="phone" value="{{ user.profile.phone }}" placeholder="연락처">
+                                </div>
+                                <!-- 주소 -->
+                                <div class="form-group">
+                                  <input type="text" name="a" id="sample6_postcode" value="{{ user.profile.zipcode }}" placeholder="우편번호">
+                                  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                                  <input type="text" name ="b" id="sample6_address" value="{{ user.profile.address1 }}" placeholder="주소"><br>
+                                  <input type="text" name="c" id="sample6_detailAddress" value="{{ user.profile.detail_address }}" placeholder="상세주소">
+                                  <input type="text" name="d" id="sample6_extraAddress" value="{{ user.profile.address2 }}" placeholder="참고항목">
+                                  <input type="hidden" class="form-control" name="profile_address" value="{{ user.profile.profile_address }}">
+                                </div>
+                                <input type="checkbox" id="f-option3" name="save-address">
+                                <label for="f-option3">회원정보에 해당 주소를 저장합니다.</label>
+                                <div class="form-group">
+                                  <select class="form-control" name="period-select">
+                                      <option value="1W">1주</option>
+                                      <option value="2W">2주</option>
+                                      <option value="3W">3주</option>
+                                      <option value="1M">1달</option>
+                                      <option value="2M">2달</option>
+                                      <option value="3M">3달</option>
+                                  </select>
+                                </div>
                             </div>
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="배송 요청사항을 작성해 주세요."></textarea>
                         </div>
-                        <div class="col-md-12 form-group mb-0">
-                            <div class="creat_account">
-                                <h3>Shipping Details</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Ship to a different address?</label>
-                            </div>
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Your Order</h2>
-                        <ul class="list">
-                            <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
-                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                            <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                            <li><a href="#">Total <span>$2210.00</span></a></li>
-                        </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Check payments</label>
-                                <div class="check"></div>
-                            </div>
-                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
-                                Store Postcode.</p>
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Paypal </label>
-                                <img src="img/product/card.jpg" alt="">
-                                <div class="check"></div>
-                            </div>
-                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                account.</p>
-                        </div>
-                        <div class="creat_account">
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="order_box">
+                          <h2>Payment Information</h2>
+                          <ul class="list list_2">
+                            <li><a>총 상품금액 <span>{{ product_total_price | intcomma }}</span></a></li>
+                            <!-- 2만원 이상 구매 시 무료배송 -->
+                            <li><a>배송비 <span>{{ delivery_price | intcomma }}원</span></a></li>
+                            <li><a>상품할인금액 <span>0원</span></a></li>
+                            <li><a>결제 예정 금액<span>{{ final_price | intcomma }}원</span></a></li>
+                          </ul>
+                          <div class="creat_account">
                             <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms & conditions*</a>
+                            <label for="f-option4">위 내용을 확인하였으며 결제에 동의합니다.</label>
+                          </div>
+                          <div class="text-center">
+                            <input type="hidden" name="final_price" value="{{ final_price }}">
+                            <input type="submit" class="button button-paypal" value="결제하기">
+                          </div>
                         </div>
-                        <div class="text-center">
-                          <a class="button button-paypal" href="#">Proceed to Paypal</a>
-                        </div>
+                      </div>
+                      
                     </div>
-                </div>
-            </div>
-        </div>
+          </div>
+      </form>
     </div>
   </section>
-  <!--================End Checkout Area =================-->
+  <!-- ================End Checkout Area ================= -->
 
 {% endblock %}

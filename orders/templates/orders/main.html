@@ -2,4 +2,9 @@
 {% load static %}
 {% block content %}
   <!-- 주문 목록 페이지 -->
+  <form action="{% url 'orders:new' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="collection_id" value="1">
+      <input type="submit" value="1번 주문">
+  </form>
 {% endblock %}
