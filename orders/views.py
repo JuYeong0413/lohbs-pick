@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def main(request):
     user = request.user
-    orders = Order.objects.filter(user=user)
+    orders = Order.objects.filter(user=user).order_by('-created_at')
     return render(request, 'orders/main.html', {'orders': orders})
 
 
