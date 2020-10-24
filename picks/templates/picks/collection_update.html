@@ -78,7 +78,7 @@
                                     <input type="hidden" name="num{{forloop.counter0}}" value="{{collection_product.id}}">
                                     <td>
                                         <div class="product_count">
-                                            <input type="text" name="quantity{{forloop.counter0}}" id="sst{{ forloop.counter0 }}" maxlength="12" value="{{ collection_product.qunatity }}" title="Quantity:" class="input-text qty" style="width:50px;height:30px;">
+                                            <input type="text" name="quantity{{forloop.counter0}}" id="sst{{ forloop.counter0 }}" maxlength="12" value="{{ collection_product.quantity }}" title="Quantity:" class="input-text qty" style="width:50px;height:30px;">
                                             <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} )) result.value++;return false;" class="increase items-count" type="button"><i class="fas fa-chevron-up"></i></button>
                                             <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} ) &amp;&amp; sst{{ forloop.counter0 }} > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fas fa-chevron-down"></i></button>
                                         </div>
