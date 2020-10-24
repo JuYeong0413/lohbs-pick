@@ -44,7 +44,8 @@
                             <p class="mb-0 mr-4" align="right"> 배송주기: {{ pick.get_period_display }}</p>
                             <p class="mr-4 mb-1" align="right"> 합계: {{ pick.collection_total | intcomma }}원</p>
                             <p class="mr-4" align="right">
-                              <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'picks:shared' %}'">공유</button>
+                              <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'orders:new' pick.id %}'">주문</button>
+                              <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'picks:share_new' pick.id %}'">공유</button>
                               <button class="m-0 btn btn-mod btn-small btn-circle" style="border-right-width: 0px" onclick="location.href='{% url 'picks:collection_update' pick.id %}'">수정</button>
                               <button class="m-0 btn btn-mod btn-small btn-circle" style="border-right-width: 0px" onclick="location.href='{% url 'picks:delete' pick.id %}'">삭제</button>
                             </p>

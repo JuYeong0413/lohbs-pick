@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def main(request):
     user = request.user
-    orders = Order.objects.filter(user=user)
+    orders = Order.objects.filter(user=user).order_by('-created_at')
     return render(request, 'orders/main.html', {'orders': orders})
 
 
@@ -20,11 +20,10 @@ def show(request, id):
 
 # 새로운 주문 작성 페이지
 @login_required
-def new(request):
+def new(request, id):
     user = request.user
-    if request.method == "POST":
-        collection_id = request.POST.get('collection_id')
-        collection = get_object_or_404(Collection, pk=collection_id)
+    collection = get_object_or_404(Collection, pk=id)
+    if user == collection.user:
         collection_products = collection.collection_products.all()
 
         total_price = 0
@@ -42,7 +41,7 @@ def new(request):
           'delivery_price': delivery_price,
           'final_price': total_price + delivery_price,
           'name': f'{user.last_name}{user.first_name}',
-          'collection_id': collection_id,
+          'collection_id': id,
           'collection_period': collection.get_period_display()
         }
         return render(request, 'orders/new.html', context)
@@ -70,13 +69,17 @@ def create(request):
             recipient = request.POST.get('recipient_name')
             recipient_phone = request.POST.get('phone')
             delivery_message = request.POST.get('message')
+            
+            if collection.period == '':
+              collection.period = request.POST.get('period-select')
+              collection.save()
+
             period = collection.period
             order = Order.objects.create(user=user, order_total=final_price, address=address, collection=collection, collection_name=collection_name, recipient=recipient, recipient_phone=recipient_phone, delivery_message=delivery_message, period=period)
 
             for product in products:
                 o = OrderProduct.objects.create(product=product.product, quantity=product.quantity)
                 order.order_products.add(o)
-
             order.save()
 
             selected = request.POST.get("save-address", None)
