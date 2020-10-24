@@ -7,7 +7,7 @@ import pdb
 def lohbs_pick(request):
     user = request.user
     picks = Collection.objects.filter(user=user)
-    return render(request, 'picks/lohbs_pick_acc.html', {'picks':picks} )
+    return render(request, 'picks/lohbs_pick.html', {'picks':picks} )
 
 #컬렉션 추가하기
 def collection_add(request):
