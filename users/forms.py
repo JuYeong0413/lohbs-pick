@@ -10,17 +10,4 @@ class MyCustomSignupForm(SignupForm):
         user.profile.nickname = self.cleaned_data['nickname']
         user.save()
         return user
-    
-<<<<<<< HEAD
-
-class MyCustomSocialSignupForm(SignupForm):
-    nickname = forms.CharField(label='닉네임')
-    
-    def save(self, request):
-        user = super(MyCustomSocialSignupForm, self).save(request)
-        user.profile.nickname.add(self.cleaned_data['nickname'])
-        user.save()
-        return user
-=======
->>>>>>> 2717ecda14c92d0ec3e892eac6ae93cb962763a1
-    
+        
