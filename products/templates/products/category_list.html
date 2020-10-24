@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 
 	<!-- ================ start banner area ================= -->	
-	<!-- <section class="blog-banner-area" id="category">
+	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
@@ -18,7 +18,7 @@
 				</div>
 			</div>
     </div>
-	</section> -->
+	</section>
 	<!-- ================ end banner area ================= -->
 
 
@@ -92,13 +92,18 @@
                     <div class="card-product__img">
                       <img class="card-img" src="{{ product.image.url }}" alt="">
                       <ul class="card-product__imgOverlay">
-                        <li><button><i class="fas fa-plus"></i></button></li>
+                        <li>
+                          <button id="btnid" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter0 }}">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </li>
+                      </button>
                       </ul>
                     </div>
                     <div class="card-body">
                       <p>{{ product.brand }}</p>
                       <h6 class="card-product__title">{{ product.name }}</h6>
-                      <p class="card-product__price" style="display: inline;">{{ product.price }}</p>
+                      <p class="card-product__price" style="display: inline;">{{ product.price| intcomma }}</p>
                       <p style="display:inline; font-size:14px;">원</p>
                     </div>
                   </div>
@@ -112,8 +117,48 @@
     </div>
   </section>
   <!-- ================ category section end ================= -->		  
-  
-
+ 
+  {% for product in category_lists %}
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter{{forloop.counter0}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">롭스픽 선택하기</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="{% url 'picks:create_cp' product.id %}" method="POST">
+              <div class="modal-body">
+                {% csrf_token %}
+                <div class="mb-2 container">
+                  <label>수량:&nbsp;</label>
+                  <div class="product_count">
+                    <input type="text" name="quantity" id="sst{{ forloop.counter0 }}" maxlength="12" value="1" title="Quantity:" class="input-text qty" style="width:50px;height:30px;">
+                    <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} )) result.value++;return false;" class="increase items-count" type="button"><i class="fas fa-chevron-up"></i></button>
+                    <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} ) &amp;&amp; sst{{ forloop.counter0 }} > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fas fa-chevron-down"></i></button>
+                  </div>
+                </div>
+                <div class="container">
+                  <label><strong><컬렉션 목록></strong></label>
+                  <br>
+                  <!-- <input class="pixel-radio" type="radio" name="new"> 새 컬렉션 만들기 -->
+                  {% for pick in lists %}
+                    <input class="pixel-radio" type="radio" name="pick" value="{{pick.id}}" style="margin-right:5px;">{{pick.name}}<br>
+                  {% endfor %}
+                    <input class="pixel-radio" type="radio" name="pick" style="margin-right:5px;" value="new">새로운 컬렉션 생성:&nbsp; <input type="text" name="collection_name">
+                </div>
+              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">저장</button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <!-- Modal -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
   <script>

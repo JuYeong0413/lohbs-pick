@@ -1,3 +1,4 @@
+// share new & edit
 function filePreview(input) {
     if (input.files && input.files[0]) {
         let reader = new FileReader();

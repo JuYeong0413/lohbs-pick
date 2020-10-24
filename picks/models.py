@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class CollectionProduct(models.Model):
     product = models.ForeignKey(Product, verbose_name=_('상품'), on_delete=models.CASCADE)
-    qunatity = models.PositiveSmallIntegerField(_('수량'))
+    quantity = models.PositiveSmallIntegerField(_('수량'))
     sub_total = models.PositiveIntegerField(_('가격'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -15,7 +15,7 @@ class CollectionProduct(models.Model):
         verbose_name_plural='컬렉션상품'
 
     def save(self, *args, **kwargs):
-        self.sub_total = self.product.price*self.qunatity
+        self.sub_total = self.product.price*self.quantity
         super().save(*args, **kwargs)
 
 
