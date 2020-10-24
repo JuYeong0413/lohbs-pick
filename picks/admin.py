@@ -12,3 +12,17 @@ class ShareAdmin(admin.ModelAdmin):
     search_fields = (
         'collection_name',
     )
+
+
+@admin.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+      list_display = (
+        'id',
+        'name',
+        'period',
+        'collection_total',
+      )
+
+      search_fields = (
+        'name',
+      )
