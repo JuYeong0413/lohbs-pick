@@ -45,5 +45,10 @@ def update(request, id):
         user.profile.phone = phone
         user.profile.profile_address = profile_address
 
+        user.profile.address1 = request.POST.get('b')
+        user.profile.address2 = request.POST.get('d')
+        user.profile.detail_address = request.POST.get('c')
+        user.profile.zipcode = request.POST.get('a')
+
         user.profile.save()
         return redirect('users:main', id)

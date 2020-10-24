@@ -85,6 +85,6 @@ def create(request):
                 user.profile.address2 = address2
                 user.profile.detail_address = detail_address
                 user.profile.zipcode = zipcode
-                user.save()
+                user.profile.save()
 
     return redirect('orders:main')
