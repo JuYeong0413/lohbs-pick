@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 import pdb
 
 #롭스픽 메인
+@login_required
 def lohbs_pick(request):
     user = request.user
     picks = Collection.objects.filter(user=user).order_by('-created_at')

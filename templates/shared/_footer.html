@@ -40,7 +40,7 @@
                                 {% if user.is_authenticated %}
                                     <a href="{% url 'users:main' user.id %}">Mypage</a>
                                 {% else %}
-                                    <a href="{{ login_url }}">Mypage</a>
+                                    <a href="{% url 'account_login' %}">Mypage</a>
                                 {% endif %}
                             </li>
                         </ul>
