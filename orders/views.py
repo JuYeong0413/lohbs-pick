@@ -42,7 +42,8 @@ def new(request):
           'delivery_price': delivery_price,
           'final_price': total_price + delivery_price,
           'name': f'{user.last_name}{user.first_name}',
-          'collection_id': collection_id
+          'collection_id': collection_id,
+          'collection_period': collection.get_period_display()
         }
         return render(request, 'orders/new.html', context)
     return redirect('orders:main')
@@ -69,7 +70,7 @@ def create(request):
             recipient = request.POST.get('recipient_name')
             recipient_phone = request.POST.get('phone')
             delivery_message = request.POST.get('message')
-            period = request.POST.get('period-select')
+            period = collection.period
             order = Order.objects.create(user=user, order_total=final_price, address=address, collection=collection, collection_name=collection_name, recipient=recipient, recipient_phone=recipient_phone, delivery_message=delivery_message, period=period)
 
             for product in products:
