@@ -10,5 +10,4 @@ class MyCustomSignupForm(SignupForm):
         user.profile.nickname = self.cleaned_data['nickname']
         user.save()
         return user
-    
-    
+        
