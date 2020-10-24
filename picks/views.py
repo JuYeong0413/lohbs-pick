@@ -23,14 +23,18 @@ def collection_update(request, collection_id):
         name  = request.POST.get('name')
         period = request.POST.get('period')
 
+        pick.name = name
+        pick.period = period
+
         for i in range(0, len(pick.collection_products.all())):
             key = request.POST.get('num'+str(i))
             quantity = request.POST.get('quantity'+str(i))
             cp = CollectionProduct.objects.get(pk=key)
-            cp.qunatity = int(quantity)
-            cp.sub_total = cp.product.price*cp.qunatity
+            cp.quantity = int(quantity)
+            cp.sub_total = cp.product.price*cp.quantity
             pick.collection_total += cp.sub_total
             cp.save()
+
         pick.save()
         return redirect('picks:lohbs_pick')
 

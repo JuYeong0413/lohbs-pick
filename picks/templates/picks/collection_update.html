@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}   
+{% load humanize %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/yeonjin.css' %}">
+
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>My LOHB's Pick 수정</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Update</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+  
+  
+
+  <!--================Cart Area =================-->
+  <!-- Section -->
+  <section class="cart_area">
+    <div class="container">
+                                
+            <!-- Form -->
+            <form method="POST" action="{% url 'picks:collection_update' pick.id %}" id="form" class="form">
+                {% csrf_token %}
+                <div class="mb-20 mb-md-10" style="margin-bottom:20px;">
+                    <label>롭스픽 이름 </label>
+                    <input type="text" name="name" class="input-md form-control" maxlength="100" value="{{ pick.name }}">
+                </div>
+
+                <label>배송주기</label>
+
+                <div class="mb-20 mb-md-10" style="margin-bottom:20px;">
+                    <select id="testSelect" name="period" class="form-control input-sm">
+                        <option value="1W">1주</option>
+                        <option value="2W">2주</option>
+                        <option value="3W">3주</option>
+                        <option value="1M">1달</option>
+                        <option value="2M">2달</option>
+                        <option value="3M">3달</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive" style="padding-top:20px;">
+                    <label>상품 목록</label>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for collection_product in pick.collection_products.all %}
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex" style="margin-right:10px;">
+                                                <img src="{{ collection_product.product.image.url }}" width="100px" height="100px"alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <strong>{{ collection_product.product.brand }}</strong><br>
+                                                {{ collection_product.product.name }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <input type="hidden" name="num{{forloop.counter0}}" value="{{collection_product.id}}">
+                                    <td>
+                                        <div class="product_count">
+                                            <input type="text" name="quantity{{forloop.counter0}}" id="sst{{ forloop.counter0 }}" maxlength="12" value="{{ collection_product.qunatity }}" title="Quantity:" class="input-text qty" style="width:50px;height:30px;">
+                                            <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} )) result.value++;return false;" class="increase items-count" type="button"><i class="fas fa-chevron-up"></i></button>
+                                            <button onclick="var result = document.getElementById('sst{{ forloop.counter0 }}'); var sst{{ forloop.counter0 }} = result.value; if( !isNaN( sst{{ forloop.counter0 }} ) &amp;&amp; sst{{ forloop.counter0 }} > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fas fa-chevron-down"></i></button>
+                                        </div>
+                                    </td>
+                                    <!-- <td>
+                                        {{ collection_product.sub_total|intcomma }} 원
+                                    </td> -->
+                                    <td>
+                                        <a href="{% url 'picks:delete_cp' collection_product.id  pick.id %}"><i class="fas fa-trash-alt" style="font-size:20px;"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container">
+                    <button type="submit" class="btn btn-primary">저장</button>            
+                </div>          
+            </form>
+            <!-- End Form -->
+        </div>
+        
+</section>
+                      
+<!-- End Section -->
+
+<script src="{% static 'js/accordion.js' %}"></script>
+<script>
+    var tmp = "{{ pick.period }}";
+    $('#testSelect').val(tmp).prop("selected",true);
+</script>
+{% endblock %}
+
+<!-- Button trigger modal -->
+
