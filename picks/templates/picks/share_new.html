@@ -3,9 +3,9 @@
 {% block content %}
     <!-- 롭스픽 공유글 작성 페이지 -->
     <style>
-        .td-last {
-            border-bottom: 1px solid #dee2e6;
-        }
+      .td-last {
+        border-bottom: 1px solid #dee2e6;
+      }
     </style>
 
     <!-- ================ start banner area ================= -->	
@@ -33,33 +33,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h3>Collection Information</h3>
-                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                        <form class="row contact_form" action="{% url 'picks:share_create' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="collection_id" value="{{ collection_id }}">
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="zip" name="zip" value="컬렉션 이름 들어갈 자리" disabled>
+                                <input type="text" class="form-control" id="zip" name="collection_name" value="{{ collection_name }}" readonly>
                             </div>
                             <div class="col-md-12 table-responsive">
                                 <table class="table">
                                     <tbody>
-                                        <tr>
+                                        {% for p in collection_products %}
+                                        <tr class="td-last">
                                             <td>
-                                                <span>상품1</span>
+                                                <span>[{{ p.product.brand }}]</span>
+                                                <span>{{ p.product.name }}</span>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <span>상품2</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span>상품3</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-last">
-                                                <span>상품4</span>
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -68,11 +58,11 @@
                                     <h3>How was your collection?</h3>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" onchange="filePreview(this)">
+                                    <input type="file" class="custom-file-input" id="customFile" name="image" accept="image/*" onchange="filePreview(this)" required>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <img src="data:," style="width: 50%" id="show-image-tag" alt>
-                                <textarea class="form-control" name="message" id="message" rows="1" placeholder="컬렉션에 대한 후기를 작성해 주세요!"></textarea>
+                                <textarea class="form-control" name="content" id="message" rows="1" placeholder="컬렉션에 대한 후기를 작성해 주세요!" required></textarea>
                             </div>
                             <div class="form-group text-center text-md-right mt-3">
                                 <button type="submit" class="button button--active button-review">등록하기</button>
@@ -87,9 +77,9 @@
 
     <script src="{% static 'js/share.js' %}"></script>
     <script>
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-          });
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
     </script>
 {% endblock %}
