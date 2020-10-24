@@ -69,18 +69,18 @@ def create(request):
             recipient = request.POST.get('recipient_name')
             recipient_phone = request.POST.get('phone')
             delivery_message = request.POST.get('message')
+            
+            if collection.period == '':
+              collection.period = request.POST.get('period-select')
+              collection.save()
+
             period = collection.period
             order = Order.objects.create(user=user, order_total=final_price, address=address, collection=collection, collection_name=collection_name, recipient=recipient, recipient_phone=recipient_phone, delivery_message=delivery_message, period=period)
 
             for product in products:
                 o = OrderProduct.objects.create(product=product.product, quantity=product.quantity)
                 order.order_products.add(o)
-
             order.save()
-            
-            if collection.period == '':
-              collection.period = request.POST.get('period-select')
-              collection.save()
 
             selected = request.POST.get("save-address", None)
             if selected == None:
