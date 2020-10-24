@@ -1,5 +1,4 @@
 from allauth.account.forms import SignupForm
-from allauth.socialaccount.forms import SignupForm
 from django import forms
 
     
@@ -12,6 +11,7 @@ class MyCustomSignupForm(SignupForm):
         user.save()
         return user
     
+<<<<<<< HEAD
 
 class MyCustomSocialSignupForm(SignupForm):
     nickname = forms.CharField(label='닉네임')
@@ -21,4 +21,6 @@ class MyCustomSocialSignupForm(SignupForm):
         user.profile.nickname.add(self.cleaned_data['nickname'])
         user.save()
         return user
+=======
+>>>>>>> 2717ecda14c92d0ec3e892eac6ae93cb962763a1
     
