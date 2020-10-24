@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from products.models import Product
+from django.contrib.auth.decorators import login_required
 import pdb
+
 
 #롭스픽 메인
 def lohbs_pick(request):
@@ -44,7 +46,7 @@ def collection_update(request, collection_id):
 def delete(request, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     collection.delete()
-    return redirect('picks:collection_update' collection_id)
+    return redirect('picks:collection_update',collection_id)
 
 #컬렉션 상품 삭제하기
 def delete_cp(request, cp_id, collection_id):
