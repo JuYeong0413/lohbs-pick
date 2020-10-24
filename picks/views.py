@@ -4,7 +4,6 @@ from products.models import Product
 from django.contrib.auth.decorators import login_required
 import pdb
 
-
 #롭스픽 메인
 def lohbs_pick(request):
     user = request.user
