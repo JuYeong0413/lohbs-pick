@@ -81,7 +81,7 @@
                         {% if user == post.user %}
                             <div class="text-right">
                                 <a href="{% url 'picks:share_edit' post.id %}" class="button button--active button-shared-main">수정</a>
-                                <a href="{% url 'picks:share_delete' post.id %}" class="button button--active button-shared-main">삭제</a>
+                                <button class="button button--active button-shared-main" data-id="{{ post.id }}" data-toggle="modal" data-target="#deleteModal" id="deletePostBtn">삭제</button>
                             </div>
                         {% endif %}
                     </div>
@@ -104,6 +104,28 @@
         </div>
     </section>
     <!-- End Section -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">글 삭제</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            정말로 삭제하시겠습니까? 삭제된 글은 복구할 수 없습니다.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            <a href="#" class="btn btn-primary" id="delete-btn">삭제하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <script src="{% static 'js/share.js' %}"></script>
 
@@ -120,6 +142,29 @@
           verticalFit: true
         }
         
+      });
+      
+      // Read More
+      function readMore() {
+        var dots = document.getElementById('dots');
+        var moreText = document.getElementById('more');
+        var btnText = document.getElementById('readMoreBtn');
+
+        if (dots.style.display === 'none') {
+          dots.style.display = 'inline';
+          btnText.innerHTML = 'Read More  <i class="fa fa-angle-right">';
+          moreText.style.display = "none";
+        } else {
+          dots.style.display = 'none';
+          btnText.innerHTML = 'Read less';
+          moreText.style.display = 'inline';
+        }
+      }
+
+      // Delete Modal
+      $(document).on("click", "#deletePostBtn", function () {
+        var postId = $(this).data('id');
+        $("#delete-btn").attr("href", `/picks/${postId}/delete`);
       });
     </script>
     <!-- end magnific-popup -->
