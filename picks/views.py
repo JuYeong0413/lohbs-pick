@@ -46,7 +46,7 @@ def collection_update(request, collection_id):
 def delete(request, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     collection.delete()
-    return redirect('picks:collection_update',collection_id)
+    return redirect('picks:lohbs_pick')
 
 #컬렉션 상품 삭제하기
 def delete_cp(request, cp_id, collection_id):
