@@ -7,7 +7,7 @@ import pdb
 #롭스픽 메인
 def lohbs_pick(request):
     user = request.user
-    picks = Collection.objects.filter(user=user)
+    picks = Collection.objects.filter(user=user).order_by('-created_at')
     return render(request, 'picks/lohbs_pick.html', {'picks':picks} )
 
 #컬렉션 추가하기
