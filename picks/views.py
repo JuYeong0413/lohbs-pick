@@ -2,24 +2,45 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from products.models import Product
 import pdb
-from django.contrib.auth.decorators import login_required
 
 #롭스픽 메인
 def lohbs_pick(request):
     user = request.user
     picks = Collection.objects.filter(user=user)
-    return render(request, 'picks/lohbs_pick.html', {'picks':picks})
+    return render(request, 'picks/lohbs_pick_acc.html', {'picks':picks} )
 
 #컬렉션 추가하기
 def collection_add(request):
     picks = Collection.objects.filter(user=request.user)
     return render(request, 'picks/choose.html', {'picks':picks})
 
+#컬렉션 수정하기
+def collection_update(request, collection_id):
+    pick = get_object_or_404(Collection, pk=collection_id)
+    pick.collection_total = 0
+
+    if request.method == "POST":
+        name  = request.POST.get('name')
+        period = request.POST.get('period')
+
+        for i in range(0, len(pick.collection_products.all())):
+            key = request.POST.get('num'+str(i))
+            quantity = request.POST.get('quantity'+str(i))
+            cp = CollectionProduct.objects.get(pk=key)
+            cp.qunatity = int(quantity)
+            cp.sub_total = cp.product.price*cp.qunatity
+            pick.collection_total += cp.sub_total
+            cp.save()
+        pick.save()
+        return redirect('picks:lohbs_pick')
+
+    return render(request, 'picks/collection_update.html', {'pick':pick})
+
 #컬렉션 삭제하기
 def delete(request, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     collection.delete()
-    return redirect('picks:lohbs_pick')
+    return redirect('picks:collection_update' collection_id)
 
 #컬렉션 상품 삭제하기
 def delete_cp(request, cp_id, collection_id):
@@ -28,8 +49,7 @@ def delete_cp(request, cp_id, collection_id):
     collection.collection_products.remove(cp)
     collection.collection_total -= cp.sub_total
     collection.save()
-
-    return redirect('picks:lohbs_pick')
+    return redirect('picks:collection_update', collection_id)
 
 #컬렉션 상품 만들고 컬렉션에 저장
 def create_cp(request, product_id):
@@ -53,7 +73,7 @@ def create_cp(request, product_id):
                     collection.collection_products.remove(collection_product)
                     collection.collection_total -= collection_product.sub_total
                     
-        cp = CollectionProduct.objects.create(product=product, quantity=quantity)        
+        cp = CollectionProduct.objects.create(product=product, qunatity=quantity)        
         collection.collection_products.add(cp)
         collection.collection_total += cp.sub_total
         collection.save()

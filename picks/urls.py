@@ -8,6 +8,7 @@ urlpatterns = [
     path('delete_cp/<int:cp_id>/<int:collection_id>/', views.delete_cp, name="delete_cp"),
     path('collection_add/', views.collection_add, name="collection_add"),
     path('create_cp/<int:product_id>/', views.create_cp, name="create_cp"),
+    path('collection_update/<int:collection_id>/', views.collection_update, name="collection_update"),
 
     ## 공유 관련
     path('shared/', views.shared, name="shared"),
