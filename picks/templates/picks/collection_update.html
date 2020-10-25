@@ -87,7 +87,7 @@
                                         {{ collection_product.sub_total|intcomma }} 원
                                     </td> -->
                                     <td>
-                                        <a href="{% url 'picks:delete_cp' collection_product.id  pick.id %}"><i class="fas fa-trash-alt" style="font-size:20px;"></i></a>
+                                        <a href="{% url 'picks:delete_cp' collection_product.id  pick.id %}" style="color:gray;"><i class="fas fa-trash-alt" style="font-size:20px;"></i></a>
                                     </td>
                                 </tr>
                             {% endfor %}
