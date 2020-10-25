@@ -155,3 +155,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'users.forms.MyCustomSignupForm'}
 SOCIALACCOUNT_FORMS = {'signup': 'users.socialforms.MyCustomSocialSignupForm'}
 SOCIALACCOUNT_AUTO_SIGNUP = False
+
+USE_L10N = False
+DATE_FORMAT = 'Y-m-d'

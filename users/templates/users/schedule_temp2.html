@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+<link href="{% static 'packages/core/main.css' %}"rel='stylesheet' />
+<link href="{% static 'packages/daygrid/main.css' %}" rel='stylesheet' />
+<script src="{% static 'packages/core/main.js' %}"></script>
+<script src="{% static 'packages/interaction/main.js' %}"></script>
+<script src="{% static 'packages/daygrid/main.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var calendar = $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: [
+                {% for event in events %}
+                    {
+                        title: "{{ event.name}}",
+                        start: '{{ event.start|date:"Y-m-d" }}',
+                        end: '{{ event.end|date:"Y-m-d" }}',
+                        id: '{{ event.id }}',
+                    },
+                {% endfor %}
+            ],
+            selectable: true,
+            selectHelper: true,
+            editable: true,
+            eventLimit: true,
+            select: function (start, end, allDay) {
+                var title = prompt("Enter Event Title");
+                if (title) {
+                    var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+                    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+                    $.ajax({
+                        type: "GET",
+                        url: '/add_event',
+                        data: {'title': title, 'start': start, 'end': end},
+                        dataType: "json",
+                        success: function (data) {
+                            calendar.fullCalendar('refetchEvents');
+                            alert("Added Successfully");
+                        },
+                        failure: function (data) {
+                            alert('There is a problem!!!');
+                        }
+                    });
+                }
+            },
+            eventResize: function (event) {
+                var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+                var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+                var title = event.title;
+                var id = event.id;
+                $.ajax({
+                    type: "GET",
+                    url: '/update',
+                    data: {'title': title, 'start': start, 'end': end, 'id': id},
+                    dataType: "json",
+                    success: function (data) {
+                        calendar.fullCalendar('refetchEvents');
+                        alert('Event Update');
+                    },
+                    failure: function (data) {
+                        alert('There is a problem!!!');
+                    }
+                });
+            },
+
+            eventDrop: function (event) {
+                var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+                var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+                var title = event.title;
+                var id = event.id;
+                $.ajax({
+                    type: "GET",
+                    url: '/update',
+                    data: {'title': title, 'start': start, 'end': end, 'id': id},
+                    dataType: "json",
+                    success: function (data) {
+                        calendar.fullCalendar('refetchEvents');
+                        alert('Event Update');
+                    },
+                    failure: function (data) {
+                        alert('There is a problem!!!');
+                    }
+                });
+            },
+
+            eventClick: function (event) {
+                if (confirm("Are you sure you want to remove it?")) {
+                    var id = event.id;
+                    $.ajax({
+                        type: "GET",
+                        url: '/remove',
+                        data: {'id': id},
+                        dataType: "json",
+                        success: function (data) {
+                            calendar.fullCalendar('refetchEvents');
+                            alert('Event Removed');
+                        },
+                        failure: function (data) {
+                            alert('There is a problem!!!');
+                        }
+                    });
+                }
+            },
+
+        });
+    });
+
+
+</script>
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+</style>
+</head>
+<body>
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="blog">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Schedule</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">schedule</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+
+  <div id='calendar'></div>
+  {% for event in events%}
+  <h2>컬렉션 이름 : {{event.name}}</h2>
+  <h2>주기 : {{event.start}}</h2>
+  {% endfor %}
+
+</body>
+{% endblock %}

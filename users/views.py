@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from orders.models import Order
 from .models import *
+import json, datetime
 
 
 # 프로필 페이지
@@ -10,8 +12,15 @@ def main(request, id):
 
 # 캘린더 페이지
 def schedule(request, id):
+    current_user = request.user
     user = get_object_or_404(User, pk=id)
-    return render(request, 'users/schedule.html', {'user':user})
+    
+    if current_user == user:
+        orders = Order.objects.filter(user__id=id)
+    else:
+        orders = Order.objects.filter(user__id=id, kinds=0)
+
+    return render(request, 'users/schedule.html', {'orders':orders, 'user':user})
 
 # 프로필 수정 페이지
 @login_required
