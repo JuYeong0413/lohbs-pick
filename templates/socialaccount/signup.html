@@ -5,7 +5,15 @@
 {% load static %}
 
 {% block content %}
-  
+
+<style>
+  .login_box_area .login_box_img .button:hover {
+    background: #fff !important;
+    color: #222 !important;
+    border-color: #fff !important;
+  }
+</style>
+
 <!-- ================ start banner area ================= -->	
 <section class="blog-banner-area" id="category">
   <div class="container h-100">
@@ -42,7 +50,7 @@
 			
                                 <button type="button" class="btn btn-outline-danger" onclick="location.href='/accounts/google/login/?process=login'" style="width:150px;">
                                     <img src="{% static 'img/google.png'%}" width=20%;>
-                                    <span class="socialaccount_provider google signup-font">구글 로그인 </span>
+                                    <span class="socialaccount_provider google signup-font">로그인 </span>
                                     <!-- <a title ="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login"> Google 로그인</a> -->
                                     <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
                                 </button>

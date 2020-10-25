@@ -8,7 +8,26 @@
 <style>
 	form {
 		margin:0 auto;
-	}
+  }
+  
+  .login_box_area .login_box_img .button:hover {
+    background: #fff !important;
+    color: #222 !important;
+    border-color: #fff !important;
+  }
+
+  .btn-outline-primary {
+    color: #194167;
+    background-color: transparent;
+    background-image: none;
+    border-color: #194167;
+  }
+
+  .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #194167;
+    border-color: #194167;
+  }
 </style> 
   <!-- ================ start banner area ================= -->	
   <section class="blog-banner-area" id="category">
@@ -36,16 +55,16 @@
 					<div class="login_box_img">
 						<div class="hover">
                             {% blocktrans %}
-							<h4>Already have an account?</h4>
-							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-                            <a class="button button-account" href="{{ login_url }}">Login Now</a>
+							<h4>이미 계정이 있으신가요?</h4>
+							<p>로그인을 하신 다음 롭스픽의 엄청난 서비스를 경험해 보세요!<br>회원가입이 귀찮으신 분들을 위해 테스트 계정도 준비했답니다.</p>
+                            <a class="button button-account" href="{{ login_url }}">로그인 하러 가기</a>
                             {% endblocktrans %}
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner register_form_inner" >
-						<h3>Create an account</h3>
+						<h3>Sign Up</h3>
 						<form class="row login_form" method="POST" action="{% url 'account_signup' %}" id="register_form" style="margin:0 auto; width:300px;" >
 							{% csrf_token %}
 								{{ form.as_p }}
