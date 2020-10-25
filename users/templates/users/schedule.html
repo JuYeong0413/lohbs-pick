@@ -8,7 +8,7 @@
 <script src="{% static 'packages/interaction/main.js' %}"></script>
 <script src="{% static 'packages/daygrid/main.js' %}"></script>
 <script>
-    console.log(`{{ all_orders }}`);
+    console.log(`{{ all_orders|safe }}`);
     var now = new Date();
 
     var year= now.getFullYear();

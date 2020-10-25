@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 import json, datetime
 from orders.models import *
-import pdb
+import json, pdb
 
 # 프로필 페이지
 def main(request, id):
@@ -26,11 +26,12 @@ def schedule(request, id):
           "color": "#ff530f"
         },)
 
-    # pdb.set_trace()
+    jsonString = json.dumps(orders_list) # json 변환
+    jsonString = jsonString.replace('[', '').replace(']', '') # 처음과 끝 대괄호 제거
 
     context = {
       'user': user,
-      'all_orders': orders_list
+      'all_orders': jsonString
     }
     return render(request, 'users/schedule.html', json.dumps(context))
 
