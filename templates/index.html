@@ -22,7 +22,7 @@
           <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
             <div class="hero-banner__content">
               <h4 style="font-family:'LotteMartHappy';">LOHB's Pick</h4>
-              <h1>나만의 롭스픽을<br>만들어보세요!</h1>
+              <h1 style="font-family:'LotteMartHappy';">나만의 롭스픽을<br>만들어보세요!</h1>
               <p>롭스의 다양한 브랜드 제품을 활용해 여러분의 롭스픽을 만들어주세요! <br>롭스픽은 정하신 주기마다 정기배송이 이루어집니다.</p>
               <a class="button button-hero" href="{% url 'picks:shared' %}">LOHB's Pick 보러가기</a>
             </div>
@@ -53,7 +53,7 @@
       <div class="container">
         <div class="section-intro pb-60px">
           <p>LOHB's Pick</p>
-          <h2>LOHB's<span class="section-intro__style">&nbsp;Best Seller</span></h2>
+          <h2 style="font-family:'LotteMartHappy';">LOHB's<span class="section-intro__style" style="font-family:'LotteMartHappy';">&nbsp;Best Seller</span></h2>
         </div>
         <div class="row">
           {% for product in products %}
@@ -64,7 +64,7 @@
                 </div>
                 <div class="card-body">
                   <p>{{ product.brand }}</p>
-                  <h4 class="card-product__title">{{ product.name }}</h4>
+                  <h4 class="card-product__title" style="font-family:'LotteMartHappy';">{{ product.name }}</h4>
                   <p class="card-product__price">{{ product.price | intcomma }}</p>
                 </div>
               </div>
@@ -82,8 +82,8 @@
         <div class="row">
           <div class="col-xl-5">
             <div class="offer__content text-center">
-              <h3>LOHB's Pick</h3>
-              <h4>내가 원하는 상품을 픽! 하세요!!</h4>
+              <h3 style="font-family:'LotteMartHappy';">LOHB's Pick</h3>
+              <h4 style="font-family:'LotteMartHappy';">내가 원하는 상품을 픽! 하세요!!</h4>
               <p>롭스픽롭스픽미픽미</p>
               <a class="button button--active mt-3 mt-xl-4" href="{% url 'products:main' %}">상품 보러가기</a>
             </div>
@@ -98,7 +98,7 @@
       <div class="container">
         <div class="section-intro pb-60px">
           <p style="margin-top:50px;">LOHB's Pick 공유하기</p>
-          <h2>What's in your<span class="section-intro__style">&nbsp;LOHB's Pick?</span></h2>
+          <h2 style="font-family:'LotteMartHappy';">What's in your<span class="section-intro__style" style="font-family:'LotteMartHappy';">&nbsp;LOHB's Pick?</span></h2>
         </div>
 
         <div class="row">
@@ -109,8 +109,8 @@
                   <img class="card-img rounded-0" src="{{ share.image.url }}" width="100%" height="100%"alt="">
                 </div>
                 <div class="card-body">
-                  <h4 class="card-blog__title"><a href="single-blog.html">{{ share.collection_name }}</a></h4>
-                  <span>{{ share.user.username|slice:":4" }}****</span> | {{ share.created_at|date:"Y.m.d"}}
+                  <h4 class="card-blog__title" style="font-family:'LotteMartHappy';"><a href="single-blog.html">{{ share.collection_name }}</a></h4>
+                  <span style="font-family:'LotteMartHappy';">{{ share.user.username|slice:":4" }}****</span> | {{ share.created_at|date:"Y.m.d"}}
                   <p>{{ share.content|slice:":30" }}...</p>
                   <a class="card-blog__link" href="{% url 'picks:shared' %}">Read More <i class="ti-arrow-right"></i></a>
                 </div>

@@ -109,10 +109,10 @@
                   <table class="table">
                       <thead>
                           <tr>
-                              <th scope="col">Product</th>
-                              <th scope="col">Price</th>
-                              <th scope="col">Quantity</th>
-                              <th scope="col">Total</th>
+                              <th scope="col" style="font-family:'LotteMartHappy';">Product</th>
+                              <th scope="col" style="font-family:'LotteMartHappy';">Price</th>
+                              <th scope="col" style="font-family:'LotteMartHappy';">Quantity</th>
+                              <th scope="col" style="font-family:'LotteMartHappy';">Total</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -129,7 +129,7 @@
                                       </div>
                                   </td>
                                   <td>
-                                      <h5>{{ p.product.price | intcomma }}원</h5>
+                                      <h5 style="font-family:'LotteMartHappy';"> {{ p.product.price | intcomma }}원</h5>
                                   </td>
                                   <td>
                                       <div class="product_count">
@@ -137,7 +137,7 @@
                                       </div>
                                   </td>
                                   <td>
-                                      <h5>{{ p.sub_total | intcomma }}원</h5>
+                                      <h5 style="font-family:'LotteMartHappy';">{{ p.sub_total | intcomma }}원</h5>
                                   </td>
                               </tr>
                           {% endfor %}
@@ -167,10 +167,10 @@
 
                               </td>
                               <td>
-                                  <h5>총 상품금액</h5>
+                                  <h5 style="font-family:'LotteMartHappy';">총 상품금액</h5>
                               </td>
                               <td>
-                                  <h5>{{ product_total_price | intcomma }}원</h5>
+                                  <h5 style="font-family:'LotteMartHappy';">{{ product_total_price | intcomma }}원</h5>
                               </td>
                           </tr>
                       </tbody>
