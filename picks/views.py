@@ -25,7 +25,9 @@ def collection_update(request, collection_id):
         name  = request.POST.get('name')
         picks = Collection.objects.filter(user=request.user).order_by('-created_at')
         for c in picks:
-            if c.name == name:
+            if c == pick:
+                continue
+            elif c.name == name:
                 message = "True"
                 return render(request, 'picks/lohbs_pick.html', {'picks':picks, 'message':message})
 
