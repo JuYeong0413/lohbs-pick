@@ -1,4 +1,4 @@
-# Lohb's Pick  
+# LOHB'S Pick  
 사이트 : 준비중
 
 ## 서비스 소개
