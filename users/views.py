@@ -18,7 +18,7 @@ def schedule(request, id):
     orders_list = []
 
     for order in all_orders:
-        parsed_date = # 여기에 파이썬으로 날짜 변환해야함 Y-m-d 형식으로
+        parsed_date = order.created_at.strftime(f'%Y-%m-%d')
         orders_list.append({
           "title": order.collection_name,
           "start": parsed_date,
@@ -32,7 +32,7 @@ def schedule(request, id):
       'user': user,
       'all_orders': orders_list
     }
-    return render(request, 'users/schedule.html', context)
+    return render(request, 'users/schedule.html', json.dumps(context))
 
 # 프로필 수정 페이지
 @login_required
