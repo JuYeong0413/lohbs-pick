@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import *
-
+import json, datetime
+from orders.models import *
+import pdb
 
 # 프로필 페이지
 def main(request, id):
@@ -10,8 +12,22 @@ def main(request, id):
 
 # 캘린더 페이지
 def schedule(request, id):
+    current_user = request.user
     user = get_object_or_404(User, pk=id)
-    return render(request, 'users/schedule.html', {'user':user})
+    all_orders = Order.objects.filter(user=user).filter(isValid=True)
+    orders_list = []
+
+    for order in all_orders:
+        parsed_date = order.created_at.strftime(f'%Y-%m-%d')
+        orders_list.append({
+          "title": order.collection_name,
+          "start": parsed_date,
+          "period":order.period,
+        },)
+
+    jsonString = json.dumps(orders_list) # json 변환
+
+    return render(request, 'users/schedule.html', {'all_orders':jsonString})
 
 # 프로필 수정 페이지
 @login_required
