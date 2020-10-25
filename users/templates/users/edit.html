@@ -62,17 +62,24 @@
             }
         }).open();
     }
-</script>	
+</script>
+
+<style>
+  .set-inline {
+    display: inline!important;
+  }
+</style>
+
 <!-- ================ start banner area ================= -->	
 <section class="blog-banner-area" id="blog">
 	<div class="container h-100">
 		<div class="blog-banner">
 			<div class="text-center">
-				<h1>Edit</h1>
+				<h1>Edit Profile</h1>
 				<nav aria-label="breadcrumb" class="banner-breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#">Home</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Edit</li>
+			<li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
 		</ol>
 		</nav>
 			</div>
@@ -85,17 +92,33 @@
 <section class="product_description_area">
 	<div class="container">
 				<div class="row">
-					<div class="review_box">
-						<h4>회원정보 수정</h4>
+					<div class="review_box col-lg-12">
+            <div class="billing_details">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h3 style="margin-bottom: 0;">Edit Profile</h3>
+                  </div>
+              </div>
+            </div>
 						<form class="row contact_form" action="{% url 'users:update' user.pk %}" method="POST" enctype="multipart/form-data" id="contactForm" novalidate="novalidate" name="form" onSubmit="return sub()">
 							{% csrf_token %}
 							<div class="col-lg-6">
 								<div class="user-name">
-									<h4>프로필사진 수정</h4>
-								</div>
-								<input type="file" name="profile_image" accept="image/*" style="margin:0 auto;">
-								<label class="mt-10">기본 이미지로 변경하기</label>
-								<input type="checkbox" name="checkbox" value="1">
+									<label>프로필사진</label>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="imageInput" name="profile_image" accept="image/*" onchange="filePreview(this)" style="margin:0 auto;">
+                  <label class="custom-file-label" id="imageInputLabel" for="imageInput">
+                    {% if user.profile.profile_image %}
+                    {{ user.profile.profile_image.url }}
+                    {% endif %}
+                  </label>
+                </div>
+                <div class="mt-2">
+                  <input type="checkbox" name="checkbox" value="1">
+                  <label class="mt-10">기본 이미지로 변경하기</label>
+                </div>
+                <img src="data:," style="width: 50%" id="show-image-tag" alt>
 							</div>
 							<div class="col-lg-6">
 								<div class="col-md-12">
@@ -113,15 +136,15 @@
 								<div class="col-md-12">
 									<label>주소</label>
 									<div class="form-group">
-										<input type="text" name="a" id="sample6_postcode" placeholder="우편번호" value="{{ user.profile.zipcode }}">
-										<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" name ="b" id="sample6_address" placeholder="주소" value="{{ user.profile.address1 }}"><br>
-										<input type="text" name="c" id="sample6_detailAddress" placeholder="상세주소" value="{{ user.profile.detail_address }}">
-										<input type="text" name="d" id="sample6_extraAddress" placeholder="참고항목" value="{{ user.profile.address2 }}">
+										<input type="text" class="form-control col-md-8 set-inline" name="a" id="sample6_postcode" placeholder="우편번호" value="{{ user.profile.zipcode }}">
+										<input type="button" class="col-md-3 set-inline mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+										<input type="text" class="form-control mb-2" name ="b" id="sample6_address" placeholder="주소" value="{{ user.profile.address1 }}">
+										<input type="text" class="form-control col-md-8 set-inline" name="c" id="sample6_detailAddress" placeholder="상세주소" value="{{ user.profile.detail_address }}">
+										<input type="text" class="form-control col-md-3 set-inline" name="d" id="sample6_extraAddress" placeholder="참고항목" value="{{ user.profile.address2 }}">
 										<input type="hidden" class="form-control" name="profile_address" value="{{ user.profile.profile_address }}">
 									</div>
 								</div>
-								<div class="col-md-12 text-right">
+								<div class="col-md-12 text-right" style="margin-top: 50px;">
 									<button type="submit" value="수정" class="btn primary-btn" onClick="sub()">수정</button>
 								</div>
 							</div>
@@ -130,6 +153,15 @@
 				</div>
 	</div>
 </section>
+
+<script src="{% static 'js/share-edit.js' %}"></script>
+<script src="{% static 'js/share.js' %}"></script>
+<script>
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
 
 {% endblock %}
 <!--================End Product Description Area =================-->
