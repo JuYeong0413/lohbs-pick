@@ -22,11 +22,22 @@ def main(request):
     for i in range(0, 11):
         category_no[str(i)] = len(Product.objects.filter(category=i))
 
+    # pagination
+    page = request.GET.get('page', 1)
+    paginator = Paginator(product_list, 21)
+    try:
+        products = paginator.get_page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     if request.user.is_active:
         lists = Collection.objects.filter(user=request.user)
         return render(request, 'products/main.html', {'products':products, 'category_no':category_no, 'lists':lists})
 
     return render(request, 'products/main.html', {'products':products, 'category_no':category_no})
+
 
 def search(request):
     sort = request.GET.get('sort', '')
