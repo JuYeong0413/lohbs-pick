@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% load i18n %}
-
+{% load account socialaccount %}
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 {% load static %}
 
 {% block content %}
-  
+<style>
+	form {
+		margin:0 auto;
+	}
+</style> 
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -40,19 +44,48 @@
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<div class="login_form_inner register_form_inner">
+					<div class="login_form_inner register_form_inner" >
 						<h3>Create an account</h3>
-						<form class="row login_form" method="POST" action="{% url 'account_signup' %}" id="register_form" >
+						<form class="row login_form" method="POST" action="{% url 'account_signup' %}" id="register_form" style="margin:0 auto; width:300px;" >
 							{% csrf_token %}
 								{{ form.as_p }}
 							{% if redirect_field_value %}
-							<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+							<input class="form-control" type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 							{% endif %}
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">{% trans "Sign Up" %}</button>
+								<button type="submit" value="submit" class="button button-login w-100">{% trans "Sign Up" %}</button>
 							</div>
 						</form>
-					</div>
+					{% get_providers as socialaccount_providers %}
+
+					{% if socialaccount_providers %}
+					<!-- <p>{% blocktrans with site.name as site_name %}Please sign in with one
+					of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+					for a {{ site_name }} account and sign in below:{% endblocktrans %}</p> -->
+					<div class="row socialaccount_ballot text-center pt-20" style="display:inline-block;">
+						<span class="col-lg-12 socialaccount_providers">
+			
+							<button type="button" class="btn btn-outline-danger" onclick="location.href='/accounts/google/login/?process=login'" style="width:150px;">
+								<img src="{% static 'img/google.png'%}" width=10%;>
+								<span class="socialaccount_provider google signup-font">구글 로그인 </span>
+								<!-- <a title ="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login"> Google 로그인</a> -->
+								<!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
+							</button>
+						</span>
+						
+			
+						<form class="col-lg-12 login" method="POST" action="{% url 'account_login' %}" style="display: inline;">
+							{% csrf_token %}
+							<input type="hidden" name="login" id="username" class="input-md round form-control" value="testuser" required id = "id_login"> 
+							<input type="hidden" name="password" required_id="id_password" class="input-md round form-control" value="testuserpassword" >
+							<button type="submit" class="btn btn-outline-primary" style="width:150px;">
+								
+								<input type="submit" style="display: none;"><span class="signup-font">테스트 계정 접속</span>
+							</button>
+						</form>
+					</div> 
+					{% endif %}
+					</div>					
 				</div>
 			</div>
 		</div>
