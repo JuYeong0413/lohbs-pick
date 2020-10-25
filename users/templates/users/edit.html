@@ -136,11 +136,11 @@
 								<div class="col-md-12">
 									<label>주소</label>
 									<div class="form-group">
-										<input type="text" class="form-control col-md-8 set-inline" name="a" id="sample6_postcode" placeholder="우편번호" value="{{ user.profile.zipcode }}">
+										<input type="text" class="form-control col-md-8 set-inline" name="a" id="sample6_postcode" placeholder="우편번호가 들어가는 자리입니다." value="{{ user.profile.zipcode }}" readonly>
 										<input type="button" class="col-md-3 set-inline mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" class="form-control mb-2" name ="b" id="sample6_address" placeholder="주소" value="{{ user.profile.address1 }}">
-										<input type="text" class="form-control col-md-8 set-inline" name="c" id="sample6_detailAddress" placeholder="상세주소" value="{{ user.profile.detail_address }}">
-										<input type="text" class="form-control col-md-3 set-inline" name="d" id="sample6_extraAddress" placeholder="참고항목" value="{{ user.profile.address2 }}">
+										<input type="text" class="form-control mb-2" name ="b" id="sample6_address" placeholder="주소가 들어가는 자리입니다." value="{{ user.profile.address1 }}" readonly>
+										<input type="text" class="form-control col-md-8 set-inline" name="c" id="sample6_detailAddress" placeholder="상세주소를 입력해주세요." value="{{ user.profile.detail_address }}">
+										<input type="text" class="form-control col-md-3 set-inline" name="d" id="sample6_extraAddress" value="{{ user.profile.address2 }}" readonly>
 										<input type="hidden" class="form-control" name="profile_address" value="{{ user.profile.profile_address }}">
 									</div>
 								</div>

@@ -8,7 +8,10 @@ import pdb
 # 프로필 페이지
 def main(request, id):
     user_profile = get_object_or_404(User, pk=id)
-    return render(request, 'users/main.html', {'user_profile': user_profile})
+
+    if request.user == user_profile:
+        return render(request, 'users/main.html', {'user_profile': user_profile})
+    return redirect('main')
 
 # 캘린더 페이지
 def schedule(request, id):
