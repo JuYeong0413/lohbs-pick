@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" style="overflow: scroll!important;">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DNYQ0HZLE"></script>
@@ -55,7 +55,7 @@
 
         {% endblock %}
     </head>
-    <body style="overflow: scroll;">
+    <body style="overflow: scroll!important;">
         {% include 'shared/_navbar.html' %}
         
         {% block content %}
@@ -73,5 +73,11 @@
         <script src="{% static 'vendors/jquery.ajaxchimp.min.js' %}"></script>
         <script src="{% static 'vendors/mail-script.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+        <script>
+          $( document ).ready(function() {
+            $("html").css("overflow", "scroll");
+            $("body").css("overflow", "scroll");
+          })
+        </script>
     </body>
 </html>
