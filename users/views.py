@@ -22,7 +22,7 @@ def edit(request, id):
     if user == current_user:
         return render(request, 'users/edit.html', {'user': user})
     else:
-        return redirect('users:main', id)
+        return redirect('users:main', current_user.id)
 
 
 # 프로필 수정

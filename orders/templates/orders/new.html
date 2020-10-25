@@ -66,6 +66,25 @@
       }
   </script>
 
+  <style>
+    .product-section-margin {
+      margin: 98px 0 0 0;
+    }
+
+    .delivery-section-margin {
+      margin: 20px 0 0 0;
+    }
+
+    .set-inline {
+      display: inline!important;
+    }
+
+    .cart_inner .table tbody tr td .product_count input {
+      width: 70px;
+      padding-left: 30px;
+    }
+  </style>
+
   <!-- ================ start banner area ================= -->	
   <section class="blog-banner-area" id="category">
     <div class="container h-100">
@@ -86,7 +105,7 @@
 
 
   <!--================ Share Area =================-->
-  <section class="checkout_area section-margin--small">
+  <section class="checkout_area section-margin--small product-section-margin">
       <div class="container">
           <div class="billing_details">
               <div class="row">
@@ -106,7 +125,7 @@
       <div class="container">
           <div class="cart_inner">
               <div class="table-responsive">
-                  <table class="table">
+                  <table class="table text-nowrap">
                       <thead>
                           <tr>
                               <th scope="col">Product</th>
@@ -141,7 +160,8 @@
                                   </td>
                               </tr>
                           {% endfor %}
-                          <tr class="bottom_button">
+                          <!-- TODO: coupon -->
+                          <!-- <tr class="bottom_button">
                               <td>
 
                               </td>
@@ -155,10 +175,10 @@
                                   <div class="cupon_text d-flex align-items-center">
                                       <input type="text" placeholder="쿠폰 코드 입력...">
                                       <a class="primary-btn" href="#">적용하기</a>
-                                      <!-- <a class="button" href="#">Have a Coupon?</a> -->
+                                      <a class="button" href="#">Have a Coupon?</a>
                                   </div>
                               </td>
-                          </tr>
+                          </tr> -->
                           <tr>
                               <td>
 
@@ -182,11 +202,11 @@
   <!--================End Cart Area =================-->
 
   <!-- ================ Checkout Area ================= -->
-  <section class="checkout_area section-margin--small">
+  <section class="checkout_area section-margin--small delivery-section-margin">
     <div class="container">
       <form class="row contact_form" action="{% url 'orders:create' %}" method="POST">
-        <div class="billing_details">
-            <div class="row">
+        <div class="col-lg-12 billing_details">
+            <div class="row mb-5">
                 <div class="col-lg-8">
                         {% csrf_token %}
                         <input type="hidden" name="collection_id" value="{{ collection_id }}">
@@ -194,24 +214,30 @@
                             <div class="creat_account">
                                 <h3>Delivery Details</h3>
                                 <div class="form-group">
+                                    <label>수령인</label>
                                     <input type="text" class="form-control" name="recipient_name" value="{{ name }}" placeholder="수령인">
                                 </div>
                                 <div class="form-group">
-                                  <input type="text" class="form-control" name="phone" value="{{ user.profile.phone }}" placeholder="연락처">
+                                    <label>연락처</label>
+                                    <input type="text" class="form-control" name="phone" value="{{ user.profile.phone }}" placeholder="연락처">
                                 </div>
                                 <!-- 주소 -->
+                                <label>주소</label>
                                 <div class="form-group">
-                                  <input type="text" name="a" id="sample6_postcode" value="{{ user.profile.zipcode }}" placeholder="우편번호">
-                                  <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                  <input type="text" name ="b" id="sample6_address" value="{{ user.profile.address1 }}" placeholder="주소"><br>
-                                  <input type="text" name="c" id="sample6_detailAddress" value="{{ user.profile.detail_address }}" placeholder="상세주소">
-                                  <input type="text" name="d" id="sample6_extraAddress" value="{{ user.profile.address2 }}" placeholder="참고항목">
+                                  <input type="text" class="form-control col-md-8 set-inline" name="a" id="sample6_postcode" value="{{ user.profile.zipcode }}" placeholder="우편번호">
+                                  <input type="button" class="col-md-3 set-inline mb-2" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                                  <input type="text" class="form-control mb-2" name ="b" id="sample6_address" value="{{ user.profile.address1 }}" placeholder="주소">
+                                  <input type="text" class="form-control col-md-8 set-inline" name="c" id="sample6_detailAddress" value="{{ user.profile.detail_address }}" placeholder="상세주소">
+                                  <input type="text" class="form-control col-md-3 set-inline" name="d" id="sample6_extraAddress" value="{{ user.profile.address2 }}" placeholder="참고항목">
                                   <input type="hidden" class="form-control" name="profile_address" value="{{ user.profile.profile_address }}">
                                 </div>
                                 <input type="checkbox" id="f-option3" name="save-address">
-                                <label for="f-option3">회원정보에 해당 주소를 저장합니다.</label>
+                                <label for="f-option3">회원정보에 해당 주소를 저장합니다.</label><br>
+                                <label>배송 주기</label>
                                 {% if collection_period %}
-                                    <input type="text" name="period" value={{ collection_period }} readonly>
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" name="period" value={{ collection_period }} readonly>
+                                    </div>
                                 {% else %}
                                     <div class="form-group">
                                       <select class="form-control" name="period-select">
@@ -225,6 +251,7 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            <label>배송 요청사항</label>
                             <textarea class="form-control" name="message" id="message" rows="1" placeholder="배송 요청사항을 작성해 주세요."></textarea>
                         </div>
                       </div>
@@ -232,15 +259,15 @@
                         <div class="order_box">
                           <h2>Payment Information</h2>
                           <ul class="list list_2">
-                            <li><a>총 상품금액 <span>{{ product_total_price | intcomma }}</span></a></li>
+                            <li><a>총 상품금액 <span>{{ product_total_price | intcomma }}원</span></a></li>
                             <!-- 2만원 이상 구매 시 무료배송 -->
                             <li><a>배송비 <span>{{ delivery_price | intcomma }}원</span></a></li>
                             <li><a>상품할인금액 <span>0원</span></a></li>
                             <li><a>결제 예정 금액<span>{{ final_price | intcomma }}원</span></a></li>
                           </ul>
                           <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">위 내용을 확인하였으며 결제에 동의합니다.</label>
+                            <!-- <input type="checkbox" id="f-option4" name="selector"> -->
+                            <small>위 내용을 확인하였으며 결제에 동의합니다.</small>
                           </div>
                           <div class="text-center">
                             <input type="hidden" name="final_price" value="{{ final_price }}">
