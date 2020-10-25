@@ -4,16 +4,19 @@ from .models import Product
 import pdb, collections, json
 from picks.models import Collection
 from picks.models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def main(request):
     sort = request.GET.get('sort', '')
 
-    if sort=="lowPrice":
-        products = Product.objects.all().order_by('price')  
-    elif sort =="highPrice":
-        products = Product.objects.all().order_by('-price')
+    if sort == "lowPrice":
+        product_list = Product.objects.all().order_by('price')  
+    elif sort == "highPrice":
+        product_list = Product.objects.all().order_by('-price')
+    elif sort == "popular":
+        product_list = Product.objects.all().annotate(num_cps=Count('collectionproduct')).order_by('-num_cps') 
     else:
-        products = Product.objects.all().annotate(num_cps=Count('collectionproduct')).order_by('-num_cps') 
+        product_list = Product.objects.all().order_by('-id')
 
     category_no = collections.defaultdict(int)
     for i in range(0, 11):

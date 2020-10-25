@@ -3,6 +3,8 @@
 {% load humanize %}
 {% block content %}
 
+  <link rel="stylesheet" href="{% static 'css/pick-shared.css' %}">
+
 	<!-- ================ start banner area ================= -->	
   <section class="blog-banner-area" id="category">
     <div class="container h-100">
@@ -115,6 +117,33 @@
             </div>
           </section>
           <!-- End Best Seller -->
+
+          <!-- TODO: Pagination -->
+          {% if search_products.exists %}
+              {% if search_products.has_other_pages %}
+                  <div class="pagination">
+                      {% if search_products.has_previous %}
+                          <a href="?page={{ search_products.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                      {% else %}
+                          <a href=""><i class="fa fa-angle-left"></i></a>
+                      {% endif %}
+                      {% for i in search_products.paginator.page_range %}
+                          {% if search_products.number == i %}
+                              <a href="" class="active">{{ i }}</a>
+                          {% else %}
+                              <a href="?page={{ i }}">{{ i }}</a>
+                          {% endif %}
+                      {% endfor %}
+                      {% if search_products.has_next %}
+                          <a href="?page={{ search_products.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                      {% else %}
+                          <a href=""><i class="fa fa-angle-right"></i></a>
+                      {% endif %}
+                  </div>
+                {% endif %}
+            {% endif %}
+            <!-- End Pagination -->
+
         </div>
       </div>
     </div>
