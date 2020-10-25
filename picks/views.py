@@ -41,6 +41,7 @@ def collection_update(request, collection_id):
             orders = pick.order_set.all()
             for order in orders:
                 order.isValid = False
+                order.save()
             pick.save()
             return redirect('orders:new', pick.id)
 
