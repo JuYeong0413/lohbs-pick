@@ -3,21 +3,21 @@
 {% block content %}
 	
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="blog">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>Mypage</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Mypage</li>
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center breadcrumb-content">
+          <h2 class="page-title">MyPage</h2>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a href="{% url 'main' %}"><i class="fas fa-home"></i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">MyPage</li>
             </ol>
           </nav>
-				</div>
-			</div>
+        </div>
+      </div>
     </div>
-	</section>
+  </section>
 	<!-- ================ end banner area ================= -->
 
   <!--================Single Product Area =================-->
