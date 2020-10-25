@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+<style>
+  @media (min-width: 1000px) {
+    .product_image_area {
+        padding-bottom: 100px;
+    }
+  }
+</style>
 	
 	<!-- ================ start banner area ================= -->	
   <section class="blog-banner-area" id="category">
@@ -57,9 +65,13 @@
             </tr>
           </table>
           {% if user.username == user_profile.username %}
-            <div class="product_count">
-              <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>
-            </div>
+            {% if user.username == 'testuser' %}
+                <div>* 테스트 계정은 회원정보 수정이 불가합니다.</div>
+            {% else %}
+                <div class="product_count">
+                  <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>
+                </div>
+            {% endif %}
           {% endif %}
 				</div>
 			</div>
