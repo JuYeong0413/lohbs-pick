@@ -41,7 +41,7 @@
                             <a class="pb-0" href="#">
                             <p class="mb-0">
                             <h6>{{ pick.name }}</h6>
-                            <p class="mb-0 mr-4" align="right"> 배송주기: {{ pick.get_period_display }}</p>
+                            <p class="mb-0 mr-4" align="right"> 배송주기: {% if pick.order_set.all %}{{ pick.get_period_display }}{% else %}-{% endif %}</p>
                             <p class="mr-4 mb-1" align="right"> 합계: {{ pick.collection_total | intcomma }}원</p>
                             <p class="mr-4" align="right">
                               <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'orders:new' pick.id %}'">주문</button>
