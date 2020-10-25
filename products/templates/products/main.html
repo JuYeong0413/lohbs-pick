@@ -149,10 +149,14 @@
                   <label><strong><컬렉션 목록></strong></label>
                   <br>
                   <!-- <input class="pixel-radio" type="radio" name="new"> 새 컬렉션 만들기 -->
-                  {% for pick in lists %}
-                    <input class="pixel-radio" type="radio" name="pick" value="{{pick.id}}" style="margin-right:5px;">{{pick.name}}<br>
-                  {% endfor %}
-                    <input class="pixel-radio" type="radio" name="pick" style="margin-right:5px;" value="new">새로운 컬렉션 생성:&nbsp; <input type="text" name="collection_name">
+                  {% if not lists %}
+                    <input class="pixel-radio" type="radio" name="pick" style="margin-right:5px;" value="new" checked>새로운 컬렉션 생성:&nbsp; <input type="text" name="collection_name">
+                  {% else %}
+                    {% for pick in lists %}
+                      <input class="pixel-radio" type="radio" name="pick" value="{{pick.id}}" style="margin-right:5px;">{{pick.name}}<br>
+                    {% endfor %}
+                      <input class="pixel-radio" type="radio" name="pick" style="margin-right:5px;" value="new">새로운 컬렉션 생성:&nbsp; <input type="text" name="collection_name">
+                  {% endif %}
                 </div>
               </div>
             <div class="modal-footer">
