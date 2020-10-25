@@ -26,7 +26,6 @@ def collection_update(request, collection_id):
         period = request.POST.get('period')
 
         pick.name = name
-        pick.period = period
 
         for i in range(0, len(pick.collection_products.all())):
             key = request.POST.get('num'+str(i))
@@ -37,6 +36,16 @@ def collection_update(request, collection_id):
             pick.collection_total += cp.sub_total
             cp.save()
 
+        if period != pick.period:
+            pick.period = period
+            orders = pick.order_set.all()
+            for order in orders:
+                order.isValid = False
+                order.save()
+            pick.save()
+            return redirect('orders:new', pick.id)
+
+        pick.period = period
         pick.save()
         return redirect('picks:lohbs_pick')
 
