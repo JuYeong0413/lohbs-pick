@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from orders.models import Order
 from .models import *
 import json, datetime
-
+from orders.models import *
+import pdb
 
 # 프로필 페이지
 def main(request, id):
@@ -14,17 +14,25 @@ def main(request, id):
 def schedule(request, id):
     current_user = request.user
     user = get_object_or_404(User, pk=id)
-    
-    if current_user == user:
-        orders = Order.objects.filter(user__id=id)
-    else:
-        orders = Order.objects.filter(user__id=id, kinds=0)
+    all_orders = Order.objects.filter(user=user).filter(isValid=True)
+    orders_list = []
 
-    for order in orders:
-        delivery = {'title':order.collection_name, 'start':order.created_at.date, 'period':order.period}
-        return render(request, 'users/schedule.html', {'delivery':delivery, 'user':user})
+    for order in all_orders:
+        parsed_date = # 여기에 파이썬으로 날짜 변환해야함 Y-m-d 형식으로
+        orders_list.append({
+          "title": order.collection_name,
+          "start": parsed_date,
+          "textColor": "white",
+          "color": "#ff530f"
+        },)
 
-    #return render(request, 'users/schedule.html', {'orders':orders, 'user':user, 'delivery':delivery})
+    # pdb.set_trace()
+
+    context = {
+      'user': user,
+      'all_orders': orders_list
+    }
+    return render(request, 'users/schedule.html', context)
 
 # 프로필 수정 페이지
 @login_required
