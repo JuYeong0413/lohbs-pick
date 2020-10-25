@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import *
 from orders.models import *
-import pdb
+import json, pdb
 
 # 프로필 페이지
 def main(request, id):
@@ -16,7 +16,7 @@ def schedule(request, id):
     orders_list = []
 
     for order in all_orders:
-        parsed_date = # 여기에 파이썬으로 날짜 변환해야함 Y-m-d 형식으로
+        parsed_date = order.created_at.strftime(f'%Y-%m-%d')
         orders_list.append({
           "title": order.collection_name,
           "start": parsed_date,
@@ -24,11 +24,12 @@ def schedule(request, id):
           "color": "#ff530f"
         },)
 
-    # pdb.set_trace()
+    jsonString = json.dumps(orders_list) # json 변환
+    jsonString = jsonString.replace('[', '').replace(']', '') # 처음과 끝 대괄호 제거
 
     context = {
       'user': user,
-      'all_orders': orders_list
+      'all_orders': jsonString
     }
     return render(request, 'users/schedule.html', context)
 
