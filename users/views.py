@@ -20,7 +20,11 @@ def schedule(request, id):
     else:
         orders = Order.objects.filter(user__id=id, kinds=0)
 
-    return render(request, 'users/schedule.html', {'orders':orders, 'user':user})
+    for order in orders:
+        delivery = {'title':order.collection_name, 'start':order.created_at.date, 'period':order.period}
+        return render(request, 'users/schedule.html', {'delivery':delivery, 'user':user})
+
+    #return render(request, 'users/schedule.html', {'orders':orders, 'user':user, 'delivery':delivery})
 
 # 프로필 수정 페이지
 @login_required

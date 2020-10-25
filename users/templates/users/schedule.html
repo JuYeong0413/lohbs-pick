@@ -16,13 +16,15 @@
               
     var today = year + '-' + mon + '-' + day
     
-    var date = new Date("{{ order.created_at|date:'Y-m-d' }}");
+    var date = new Date("{{ delivery.start|date:'Y-m-d' }}");
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
     //var orders = "{{orders|safe}}";
     /*
-    for (var order in "{{orders|safe}}")
+    var orders = "{{orders|safe}}";
+    
+    for (var order in orders)
     {
       var date = new Date(order.created_at);
       var d = date.getDate();
@@ -34,12 +36,36 @@
         m = m+1; // TODO: 나중에 여기에 주기 변수 넣어주면 됨.
 		    // TODO : 사용자의 컬렉션에서 주기 가져오기. 사용자의 오더에서 오더한 컬렉션 이름과 생성날짜 가져와서 이중for문 돌리기.
       }
-    }
-*/
-    for (var i=0, result=[]; i<10; i++)
+    }*/
+
+    for (var i=0, result=[]; i<12; i++)
     {
-        result.push({"title":"{{ order.collection_name }}", "start":new Date(y,m,d), "textColor": "white", "color":"#ff530f"})
-        d = d+14; // TODO: 나중에 여기에 주기 변수 넣어주면 됨.
+        result.push({"title":"{{ delivery.title }}", "start":new Date(y,m,d), "textColor": "white", "color":"#ff530f"})
+        if("{{delivery.period}}"=="1W")
+        {
+            d=d+7;
+        }
+        else if("{{delivery.period}}"=="2W")
+        {
+            d=d+14;
+        }
+        else if("{{delivery.period}}"=="3W")
+        {
+            d+d+21;
+        }
+        else if("{{delivery.period}}"=="1M")
+        {
+            m=m+1;
+        }
+        else if("{{delivery.period}}"=="2M")
+        {
+            m=m+2;
+        }
+        else if("{{delivery.period}}"=="3M")
+        {
+            m=m+3;
+        }
+        //d = d+14; // TODO: 나중에 여기에 주기 변수 넣어주면 됨.
 		// TODO : 사용자의 컬렉션에서 주기 가져오기. 사용자의 오더에서 오더한 컬렉션 이름과 생성날짜 가져와서 이중for문 돌리기.
     }
     
@@ -123,9 +149,10 @@
 
 
   <div id='calendar'></div>
-  {% for event in events%}
-  <h2>컬렉션 이름 : {{event.name}}</h2>
-  <h2>주기 : {{event.start}}</h2>
+  {% for i in delivery %}
+  <h2>날짜 : {{i.start}}</h2>
+  <h2>제목 : {{i.title}}</h2>
+  <h2>주기 : {{i.period}}</h2>
   {% endfor %}
 
 </body>
