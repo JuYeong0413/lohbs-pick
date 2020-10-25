@@ -6,21 +6,21 @@
 <link rel="stylesheet" href="{% static 'css/accordion.css' %}">
 
 	<!-- ================ start banner area ================= -->	
-  <section class="blog-banner-area" id="category">
-    <div class="container h-100">
-      <div class="blog-banner">
-        <div class="text-center breadcrumb-content">
-          <h2 class="page-title">My LOHB'S Pick</h2>
-          <nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item"><a href="{% url 'main' %}"><i class="fas fa-home"></i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">My LOHB'S Pick</li>
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>My LOHB's Pick</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">My LOHB's Pick</li>
             </ol>
           </nav>
-        </div>
-      </div>
+				</div>
+			</div>
     </div>
-  </section>
+	</section>
 	<!-- ================ end banner area ================= -->
   
   
@@ -41,12 +41,10 @@
                             <a class="pb-0" href="#">
                             <p class="mb-0">
                             <h6>{{ pick.name }}</h6>
-                            <p class="mb-0 mr-4" align="right"> 배송주기: {% if pick.period %}{{ pick.get_period_display }}{% else %}-{% endif %}</p>
+                            <p class="mb-0 mr-4" align="right"> 배송주기: {{ pick.get_period_display }}</p>
                             <p class="mr-4 mb-1" align="right"> 합계: {{ pick.collection_total | intcomma }}원</p>
                             <p class="mr-4" align="right">
-                              {% if not pick.order_set.all %}
-                                  <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'orders:new' pick.id %}'">주문</button>
-                              {% endif %}
+                              <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'orders:new' pick.id %}'">주문</button>
                               <button class="m-0 btn btn-mod btn-small btn-circle" onclick="location.href='{% url 'picks:share_new' pick.id %}'">공유</button>
                               <button class="m-0 btn btn-mod btn-small btn-circle" style="border-right-width: 0px" onclick="location.href='{% url 'picks:collection_update' pick.id %}'">수정</button>
                               <button class="m-0 btn btn-mod btn-small btn-circle" style="border-right-width: 0px" onclick="location.href='{% url 'picks:delete' pick.id %}'">삭제</button>
@@ -113,6 +111,13 @@
 <!-- End Section -->
 
 <script src="{% static 'js/accordion.js' %}"></script>
+
+<script>
+    var tmp = "{{ message }}";
+    if (tmp) {
+        alert("해당 이름을 가진 롭스픽이 존재합니다.\n롭스픽 이름은 중복될 수 없습니다.");
+    }
+</script>
 
 {% endblock %}
 

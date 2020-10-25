@@ -23,9 +23,16 @@ def collection_update(request, collection_id):
 
     if request.method == "POST":
         name  = request.POST.get('name')
+        picks = Collection.objects.filter(user=request.user).order_by('-created_at')
+        for c in picks:
+            if c.name == name:
+                message = "True"
+                return render(request, 'picks/lohbs_pick.html', {'picks':picks, 'message':message})
+
         period = request.POST.get('period')
 
         pick.name = name
+        pick.period = period
 
         for i in range(0, len(pick.collection_products.all())):
             key = request.POST.get('num'+str(i))
@@ -36,16 +43,6 @@ def collection_update(request, collection_id):
             pick.collection_total += cp.sub_total
             cp.save()
 
-        if period != pick.period:
-            pick.period = period
-            orders = pick.order_set.all()
-            for order in orders:
-                order.isValid = False
-                order.save()
-            pick.save()
-            return redirect('orders:new', pick.id)
-
-        pick.period = period
         pick.save()
         return redirect('picks:lohbs_pick')
 
@@ -71,7 +68,7 @@ def create_cp(request, product_id):
     if request.user.is_active:
         if request.method == "POST":
 
-            product = Product.objects.get(pk=product_id)
+            product = get_object_or_404(Product, pk=product_id)
             quantity = request.POST.get('quantity')
             pick = request.POST.get('pick')
             quantity = int(quantity)
@@ -79,10 +76,15 @@ def create_cp(request, product_id):
             if pick == "new":
                 name = request.POST.get('collection_name')
                 user = request.user 
+                picks = Collection.objects.filter(user=user).order_by('-created_at')
+                for c in picks:
+                    if c.name == name:
+                        message = "True"
+                        return render(request, 'picks/lohbs_pick.html', {'picks':picks, 'message':message})
                 collection = Collection.objects.create(user=user, name=name)
                 
             else:
-                collection = Collection.objects.get(pk=pick)
+                collection = get_object_or_404(Collection, pk=pick)
 
                 for collection_product in collection.collection_products.all():
                     if product == collection_product.product:
