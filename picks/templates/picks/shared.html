@@ -103,16 +103,28 @@
             </div>
                   
             <!-- TODO: Pagination -->
-            <!-- <div class="pagination">
-                <a href=""><i class="fa fa-angle-left"></i></a>
-                <a href="" class="active">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a class="no-active">...</a>
-                <a href="">9</a>
-                <a href=""><i class="fa fa-angle-right"></i></a>
-            </div> -->
-            <!-- End Pagination -->
+            {% if posts.has_other_pages %}
+            <div class="pagination">
+                {% if posts.has_previous %}
+                    <a href="?page={{ posts.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                {% else %}
+                    <a href=""><i class="fa fa-angle-left"></i></a>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                    {% if products.number == i %}
+                        <a href="" class="active">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                {% else %}
+                    <a href=""><i class="fa fa-angle-right"></i></a>
+                {% endif %}
+            </div>
+          {% endif %}
+          <!-- End Pagination -->
 
         </div>
     </section>

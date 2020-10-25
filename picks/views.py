@@ -3,20 +3,23 @@ from .models import *
 from products.models import Product
 from django.contrib.auth.decorators import login_required
 import pdb
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-#롭스픽 메인
+# 롭스픽 메인
 @login_required
 def lohbs_pick(request):
     user = request.user
     picks = Collection.objects.filter(user=user).order_by('-created_at')
     return render(request, 'picks/lohbs_pick.html', {'picks':picks} )
 
-#컬렉션 추가하기
+
+# 컬렉션 추가하기
 def collection_add(request):
     picks = Collection.objects.filter(user=request.user)
     return render(request, 'picks/choose.html', {'picks':picks})
 
-#컬렉션 수정하기
+
+# 컬렉션 수정하기
 def collection_update(request, collection_id):
     pick = get_object_or_404(Collection, pk=collection_id)
     pick.collection_total = 0
@@ -50,13 +53,15 @@ def collection_update(request, collection_id):
 
     return render(request, 'picks/collection_update.html', {'pick':pick})
 
-#컬렉션 삭제하기
+
+# 컬렉션 삭제하기
 def delete(request, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     collection.delete()
     return redirect('picks:lohbs_pick')
 
-#컬렉션 상품 삭제하기
+
+# 컬렉션 상품 삭제하기
 def delete_cp(request, cp_id, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     cp = get_object_or_404(CollectionProduct, pk=cp_id)
@@ -65,7 +70,8 @@ def delete_cp(request, cp_id, collection_id):
     collection.save()
     return redirect('picks:collection_update', collection_id)
 
-#컬렉션 상품 만들고 컬렉션에 저장
+
+# 컬렉션 상품 만들고 컬렉션에 저장
 def create_cp(request, product_id):
     if request.user.is_active:
         if request.method == "POST":
@@ -106,7 +112,16 @@ def create_cp(request, product_id):
 ## 공유 관련
 # 공유된 롭스픽 메인 페이지(목록)
 def shared(request):
-    posts = Share.objects.all().order_by('-created_at')
+    posts_list = Share.objects.all().order_by('-id')
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(posts_list, 12)
+    try:
+        posts = paginator.get_page(page)
+    except PageNotAnInteger:
+        pstss = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
     return render(request, 'picks/shared.html', {'posts': posts})
 
 
