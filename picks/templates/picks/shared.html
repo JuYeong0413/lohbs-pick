@@ -72,6 +72,7 @@
                         
                         <div class="post-prev-info font-alt">
                             <span>{{ post.user.username|slice:":4" }}****</span> | {{ post.created_at|date:"Y.m.d"}}
+                            <p>{{ post.collection_products }}</p>
                         </div>
                         {% if post.content|length > 100 %}
                             <div class="post-prev-text">
