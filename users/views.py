@@ -17,20 +17,23 @@ def main(request, id):
 def schedule(request, id):
     current_user = request.user
     user = get_object_or_404(User, pk=id)
-    all_orders = Order.objects.filter(user=user).filter(isValid=True)
-    orders_list = []
+    
+    if user == request.user:
+        all_orders = Order.objects.filter(user=user).filter(isValid=True)
+        orders_list = []
 
-    for order in all_orders:
-        parsed_date = order.created_at.strftime(f'%Y-%m-%d')
-        orders_list.append({
-          "title": order.collection_name,
-          "start": parsed_date,
-          "period":order.period,
-        },)
+        for order in all_orders:
+            parsed_date = order.created_at.strftime(f'%Y-%m-%d')
+            orders_list.append({
+              "title": order.collection_name,
+              "start": parsed_date,
+              "period":order.period,
+            },)
 
-    jsonString = json.dumps(orders_list) # json 변환
+        jsonString = json.dumps(orders_list) # json 변환
 
-    return render(request, 'users/schedule.html', {'all_orders':jsonString})
+        return render(request, 'users/schedule.html', {'all_orders':jsonString})
+    return redirect('users:schedule', current_user.id)
 
 # 프로필 수정 페이지
 @login_required
