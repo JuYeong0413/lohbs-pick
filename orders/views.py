@@ -77,15 +77,15 @@ def create(request):
             period = collection.period
             order = Order.objects.create(user=user, order_total=final_price, address=address, collection=collection, collection_name=collection_name, recipient=recipient, recipient_phone=recipient_phone, delivery_message=delivery_message, period=period)
 
+            # OrderProduct 생성해서 Order에 연결
             for product in products:
                 o = OrderProduct.objects.create(product=product.product, quantity=product.quantity)
                 order.order_products.add(o)
             order.save()
 
-            selected = request.POST.get("save-address", None)
-            if selected == None:
-                return redirect('orders:main')
-            elif selected in 'save_address':
+            # 주소 프로필에도 저장
+            if request.POST.get('checkbox'):
+                user.profile.profile_address = f'{zipcode} {address1}{detail_address}{address2}'
                 user.profile.address1 = address1
                 user.profile.address2 = address2
                 user.profile.detail_address = detail_address
