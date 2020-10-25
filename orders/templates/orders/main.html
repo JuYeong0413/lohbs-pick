@@ -35,6 +35,11 @@
                             <a class="pb-0" href="#">
                                 <p class="mb-0">
                                     <h6>{{ order.collection_name }}</h6>
+                                    <span>{{ order.recipient }}({{ order.recipient_phone }})</span><br>
+                                    <span>{{ order.address }}</span><br>
+                                    {% if order.delivery_message %}
+                                        <span>배송메세지: {{ order.delivery_message }}</span>
+                                    {% endif %}
                                     <p class="mb-0 mr-4" align="right"> 결제일: {{ order.created_at | date:"Y.m.d" }}</p>
                                     <p class="mr-4 mb-1" align="right"> 합계: {{ order.order_total | intcomma }}원</p>
                                 </p>
