@@ -42,7 +42,10 @@ def edit(request, id):
     user = get_object_or_404(User, pk=id)
 
     if user == current_user:
-        return render(request, 'users/edit.html', {'user': user})
+        if user.username == 'testuser':
+            return redirect('users:main', current_user.id)
+        else:
+            return render(request, 'users/edit.html', {'user': user})
     else:
         return redirect('users:main', current_user.id)
 
