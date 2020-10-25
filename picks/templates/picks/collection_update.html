@@ -42,7 +42,7 @@
 
                 <div class="mb-20 mb-md-10" style="margin-bottom:20px;">
                     <select id="testSelect" name="period" class="form-control input-sm">
-                        <option value="1W">1주</option>
+                        <option value="1W" selected>1주</option>
                         <option value="2W">2주</option>
                         <option value="3W">3주</option>
                         <option value="1M">1달</option>
@@ -87,7 +87,7 @@
                                         {{ collection_product.sub_total|intcomma }} 원
                                     </td> -->
                                     <td>
-                                        <a href="{% url 'picks:delete_cp' collection_product.id  pick.id %}"><i class="fas fa-trash-alt" style="font-size:20px;"></i></a>
+                                        <a href="{% url 'picks:delete_cp' collection_product.id  pick.id %}" style="color:gray;"><i class="fas fa-trash-alt" style="font-size:20px;"></i></a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -95,7 +95,7 @@
                     </table>
                 </div>
                 <div class="container">
-                    <button type="submit" class="btn btn-primary">저장</button>            
+                    <button type="submit" class="button button--active button-review">저장</button>
                 </div>          
             </form>
             <!-- End Form -->
@@ -106,10 +106,14 @@
 <!-- End Section -->
 
 <script src="{% static 'js/accordion.js' %}"></script>
+
 <script>
     var tmp = "{{ pick.period }}";
-    $('#testSelect').val(tmp).prop("selected",true);
+    if (tmp) {
+        $('#testSelect').val(tmp).prop("selected",true);
+    }
 </script>
+
 {% endblock %}
 
 <!-- Button trigger modal -->
