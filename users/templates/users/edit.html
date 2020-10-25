@@ -130,7 +130,7 @@
 								<div class="col-md-12">
 									<label>연락처</label>
 									<div class="form-group">
-										<input type="text" class="form-control" name="phone" value="{{ user.profile.phone }}">
+										<input type="text" class="form-control phone" name="phone" value="{{ user.profile.phone }}" maxlength="13">
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -161,6 +161,22 @@
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+
+  $('.phone').keydown(function(event) {
+    var key = event.charCode || event.keyCode || 0;
+    $text = $(this);
+    if (key !== 8 && key !== 9) {
+      if ($text.val().length === 3) {
+        $text.val($text.val() + '-');
+      }
+      if ($text.val().length === 8) {
+        $text.val($text.val() + '-');
+      }
+    }
+ 
+    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+  });
+
 </script>
 
 {% endblock %}

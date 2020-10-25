@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>연락처</label>
-                                    <input type="text" class="form-control" name="phone" value="{{ user.profile.phone }}" placeholder="연락처를 입력해주세요." required>
+                                    <input type="text" class="form-control phone" name="phone" maxlength="13" value="{{ user.profile.phone }}" placeholder="연락처를 입력해주세요." required>
                                 </div>
                                 <!-- 주소 -->
                                 <label>주소</label>
@@ -273,5 +273,22 @@
     </div>
   </section>
   <!-- ================End Checkout Area ================= -->
+
+  <script>
+  $('.phone').keydown(function(event) {
+    var key = event.charCode || event.keyCode || 0;
+    $text = $(this);
+    if (key !== 8 && key !== 9) {
+      if ($text.val().length === 3) {
+        $text.val($text.val() + '-');
+      }
+      if ($text.val().length === 8) {
+        $text.val($text.val() + '-');
+      }
+    }
+ 
+    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+  });
+  </script>
 
 {% endblock %}
