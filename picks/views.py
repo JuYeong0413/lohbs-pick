@@ -170,8 +170,12 @@ def share_edit(request, id):
 def share_update(request, id):
     share = get_object_or_404(Share, pk=id)
     if request.method == "POST":
-        share.image = request.POST.get('')
-        share.content = request.POST.get('')
+        image = request.FILES.get('image')
+        
+        if image :
+            share.image = image
+
+        share.content = request.POST.get('content')
         share.save()
     return redirect('picks:shared')
 
