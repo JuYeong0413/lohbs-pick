@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<head>
+{% block extrahead %}
+
 <link href="{% static 'packages/core/main.css' %}"rel='stylesheet' />
 <link href="{% static 'packages/daygrid/main.css' %}" rel='stylesheet' />
 <script src="{% static 'packages/core/main.js' %}"></script>
 <script src="{% static 'packages/interaction/main.js' %}"></script>
 <script src="{% static 'packages/daygrid/main.js' %}"></script>
 <script>
+    console.log(`{{ all_orders }}`);
     var now = new Date();
 
     var year= now.getFullYear();
@@ -44,7 +45,7 @@
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       eventLimit: true, // allow "more" link when too many events
-      events: result,
+      events: `{{ all_orders }}`,
       eventContent: function(arg) {
                 let arrayOfDomNodes = []
                 // title event
@@ -87,8 +88,9 @@
   }
 
 </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="blog">
 		<div class="container h-100">
@@ -110,5 +112,4 @@
 
   <div id='calendar'></div>
 
-</body>
 {% endblock %}

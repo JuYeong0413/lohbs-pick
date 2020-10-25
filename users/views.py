@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import *
-
+from orders.models import *
+import pdb
 
 # 프로필 페이지
 def main(request, id):
@@ -11,7 +12,25 @@ def main(request, id):
 # 캘린더 페이지
 def schedule(request, id):
     user = get_object_or_404(User, pk=id)
-    return render(request, 'users/schedule.html', {'user':user})
+    all_orders = Order.objects.filter(user=user).filter(isValid=True)
+    orders_list = []
+
+    for order in all_orders:
+        parsed_date = # 여기에 파이썬으로 날짜 변환해야함 Y-m-d 형식으로
+        orders_list.append({
+          "title": order.collection_name,
+          "start": parsed_date,
+          "textColor": "white",
+          "color": "#ff530f"
+        },)
+
+    # pdb.set_trace()
+
+    context = {
+      'user': user,
+      'all_orders': orders_list
+    }
+    return render(request, 'users/schedule.html', context)
 
 # 프로필 수정 페이지
 @login_required
