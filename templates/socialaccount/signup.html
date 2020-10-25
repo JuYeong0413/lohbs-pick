@@ -31,16 +31,24 @@
             <div class="col-lg-12">
                 <div class="login_form_inner register_form_inner">
                     <h3>Google Login</h3>
-                    <form class="row login_form" method="POST" action="{% url 'socialaccount_signup' %}" id="register_form" >
+                    <form style="width:300px;" class="row login_form" method="POST" action="{% url 'socialaccount_signup' %}" id="register_form" >
                         {% csrf_token %}
                             {{ form.as_p }}
                         {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                         {% endif %}
-                        <div class="col-md-12 form-group">
-                            <button type="submit" value="submit" class="button button-register w-100">{% trans "구글로그인" %}</button>
+                        <div class="col-md-12 form-group" >
+                            <span class="col-lg-12 socialaccount_providers">
+			
+                                <button type="button" class="btn btn-outline-danger" onclick="location.href='/accounts/google/login/?process=login'" style="width:150px;">
+                                    <img src="{% static 'img/google.png'%}" width=20%;>
+                                    <span class="socialaccount_provider google signup-font">구글 로그인 </span>
+                                    <!-- <a title ="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login"> Google 로그인</a> -->
+                                    <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
+                                </button>
+                            </span>
                         </div>
-                    </form>
+                    </form><br>
                 </div>
             </div>
         </div>
