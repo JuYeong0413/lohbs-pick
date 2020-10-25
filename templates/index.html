@@ -16,7 +16,7 @@
         <div class="row no-gutters align-items-center pt-60px">
           <div class="col-5 d-none d-sm-block">
             <div class="hero-banner__img">
-              <img class="img-fluid" src="{% static 'img/home/hero-banner.png' %}" alt="">
+              <img class="img-fluid" src="{% static 'img/bbb.png' %}" width="100%" alt="">
             </div>
           </div>
           <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
@@ -110,8 +110,8 @@
                 </div>
                 <div class="card-body">
                   <h4 class="card-blog__title"><a href="single-blog.html">{{ share.collection_name }}</a></h4>
-                  <span>{{ post.user.username|slice:":4" }}****</span> | {{ post.created_at|date:"Y.m.d"}}
-                  <p>{{ post.content|slice:":30" }}...</p>
+                  <span>{{ share.user.username|slice:":4" }}****</span> | {{ share.created_at|date:"Y.m.d"}}
+                  <p>{{ share.content|slice:":30" }}...</p>
                   <a class="card-blog__link" href="{% url 'picks:shared' %}">Read More <i class="ti-arrow-right"></i></a>
                 </div>
               </div>

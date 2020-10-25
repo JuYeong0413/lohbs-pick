@@ -14,7 +14,7 @@
           </button>
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item active"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="{% url 'products:main' %}">Products</a></li>
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lohbs' pick</a>
@@ -26,6 +26,7 @@
                 </ul>
 			        </li>
               {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'orders:main' %}">Orders</a></li>
                 <li class="nav-item submenu dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mypage</a>
                   <ul class="dropdown-menu">
@@ -33,16 +34,15 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'users:schedule' user.id %}">Schedule</a></li>
                   </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'orders:main' %}">Orders</a></li>
               {% endif %}
             </ul>
 
             <ul class="nav-shop">
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i> logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}" style="color:black;"><i class="fas fa-sign-out-alt"></i> logout</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}"><i class="fas fa-user-plus"></i> Sign up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}" style="color:black;"><i class="fas fa-sign-in-alt"></i> login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}" style="color:black;"><i class="fas fa-user-plus"></i> Sign up</a></li>
                 {% endif %}
             </ul>
           </div>

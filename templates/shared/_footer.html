@@ -7,7 +7,7 @@
     }
 
     .developers-name:hover {
-        color: #384aeb;
+        color: #ff530f;
     }
 </style>
 
@@ -20,11 +20,10 @@
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title large_title">Our Services</h4>
                         <p>
-                            So seed seed green that winged cattle in. Gathering thing made fly you're no 
-                            divided deep moved us lan Gathering thing us land years living.
+                          여러분이 사용하고 있는 화장품, 매번 드럭스토어나 로드샵을 방문하기 귀찮지 않으신가요?
                         </p>
                         <p>
-                            서비스 설명을 구구절절 써보자... 
+                          롭스의 다양한 브랜드 제품을 활용해 여러분의 롭스픽을 만들어보세요! 원하는 주기마다 여러분이 담아둔 컬렉션을 정기배송 받을 수 있습니다.
                         </p>
                     </div>
                 </div>
@@ -41,7 +40,7 @@
                                 {% if user.is_authenticated %}
                                     <a href="{% url 'users:main' user.id %}">Mypage</a>
                                 {% else %}
-                                    <a href="{{ login_url }}">Mypage</a>
+                                    <a href="{% url 'account_login' %}">Mypage</a>
                                 {% endif %}
                             </li>
                         </ul>

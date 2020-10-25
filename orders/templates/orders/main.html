@@ -1,10 +1,99 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/accordion.css' %}">
+  
   <!-- 주문 목록 페이지 -->
-  <form action="{% url 'orders:new' %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="collection_id" value="1">
-      <input type="submit" value="1번 주문">
-  </form>
+  <!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>My Orders</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Orders</li>
+            </ol>
+          </nav>
+				</div>
+			</div>
+    </div>
+	</section>
+  <!-- ================ end banner area ================= -->
+
+  <section class="cart_area">
+    <div class="container">
+        <div class="row section-text">
+            <div class="col-md-8 col-md-offset-2" style="margin:0 auto;">
+                <!-- Accordion -->
+                <dl class="accordion">
+                    
+                    {% for order in orders %}
+                        <dt>
+                            <a class="pb-0" href="#">
+                                <p class="mb-0">
+                                    <h6>{{ order.collection_name }}</h6>
+                                    <span>{{ order.recipient }}({{ order.recipient_phone }})</span><br>
+                                    <span>{{ order.address }}</span><br>
+                                    {% if order.delivery_message %}
+                                        <span>배송메세지: {{ order.delivery_message }}</span>
+                                    {% endif %}
+                                    <p class="mb-0 mr-4" align="right"> 결제일: {{ order.created_at | date:"Y.m.d" }}</p>
+                                    <p class="mr-4 mb-1" align="right"> 합계: {{ order.order_total | intcomma }}원</p>
+                                </p>
+                            </a>
+                        </dt>
+                            <dd class="px-0 py-0" style="border: 1px solid #ddd;">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order_product in order.order_products.all %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="media">
+                                                            <div class="d-flex">
+                                                                <img src="{{ order_product.product.image.url }}" width="100px" height="100px" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ order_product.product.brand }}</strong><br>
+                                                        {{ order_product.product.name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ order_product.product.price | intcomma }}원
+                                                    </td>
+                                                    <td>
+                                                        <div class="product_count">
+                                                            {{ order_product.quantity }}개
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </dd>
+                    {% endfor %}
+                </dl>
+                <!-- End Accordion -->  
+            </div>
+        </div>
+    </div>
+  </section>
+  
+  <script src="{% static 'js/accordion.js' %}"></script>
 {% endblock %}

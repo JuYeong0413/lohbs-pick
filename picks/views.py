@@ -5,9 +5,10 @@ from django.contrib.auth.decorators import login_required
 import pdb
 
 #롭스픽 메인
+@login_required
 def lohbs_pick(request):
     user = request.user
-    picks = Collection.objects.filter(user=user)
+    picks = Collection.objects.filter(user=user).order_by('-created_at')
     return render(request, 'picks/lohbs_pick.html', {'picks':picks} )
 
 #컬렉션 추가하기
@@ -45,7 +46,7 @@ def collection_update(request, collection_id):
 def delete(request, collection_id):
     collection = get_object_or_404(Collection, pk=collection_id)
     collection.delete()
-    return redirect('picks:collection_update',collection_id)
+    return redirect('picks:lohbs_pick')
 
 #컬렉션 상품 삭제하기
 def delete_cp(request, cp_id, collection_id):
@@ -58,32 +59,35 @@ def delete_cp(request, cp_id, collection_id):
 
 #컬렉션 상품 만들고 컬렉션에 저장
 def create_cp(request, product_id):
-    if request.method == "POST":
+    if request.user.is_active:
+        if request.method == "POST":
 
-        product = Product.objects.get(pk=product_id)
-        quantity = request.POST.get('quantity')
-        pick = request.POST.get('pick')
-        quantity = int(quantity)
+            product = Product.objects.get(pk=product_id)
+            quantity = request.POST.get('quantity')
+            pick = request.POST.get('pick')
+            quantity = int(quantity)
 
-        if pick == "new":
-            name = request.POST.get('collection_name')
-            user = request.user 
-            collection = Collection.objects.create(user=user, name=name)
-            
-        else:
-            collection = Collection.objects.get(pk=pick)
+            if pick == "new":
+                name = request.POST.get('collection_name')
+                user = request.user 
+                collection = Collection.objects.create(user=user, name=name)
+                
+            else:
+                collection = Collection.objects.get(pk=pick)
 
-            for collection_product in collection.collection_products.all():
-                if product == collection_product.product:
-                    collection.collection_products.remove(collection_product)
-                    collection.collection_total -= collection_product.sub_total
-                    
-        cp = CollectionProduct.objects.create(product=product, quantity=quantity)        
-        collection.collection_products.add(cp)
-        collection.collection_total += cp.sub_total
-        collection.save()
+                for collection_product in collection.collection_products.all():
+                    if product == collection_product.product:
+                        collection.collection_products.remove(collection_product)
+                        collection.collection_total -= collection_product.sub_total
+                        
+            cp = CollectionProduct.objects.create(product=product, quantity=quantity)        
+            collection.collection_products.add(cp)
+            collection.collection_total += cp.sub_total
+            collection.save()
 
-        return redirect('picks:lohbs_pick')      
+            return redirect('picks:lohbs_pick')      
+    else:
+      return redirect('account_login')
 
 
 ## 공유 관련

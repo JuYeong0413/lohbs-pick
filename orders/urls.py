@@ -5,6 +5,6 @@ app_name ="orders"
 urlpatterns = [
     path('', main, name="main"),
     path('<int:id>/', show, name="show"),
-    path('new/', new, name="new"),
+    path('<int:id>/new/', new, name="new"),
     path('create/', create, name="create")
 ]
