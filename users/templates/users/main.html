@@ -20,7 +20,6 @@
 	</section>
 	<!-- ================ end banner area ================= -->
 
-
   <!--================Single Product Area =================-->
 	<div class="product_image_area">
 		<div class="container">
@@ -38,23 +37,34 @@
 						</div> -->
 					</div>
 				</div>
-				<div class="col-lg-5 offset-lg-1">
-					<div class="s_product_text">
-						<h3>username: {{ user_profile.username }}</h3>
-						<h2>nickname : {{ user_profile.profile.nickname }}</h2>
-						<ul class="list">
-							<li><a class="active" href="#"><span>Phone</span> : {{ user_profile.profile.phone }}</a></li>
-							<li><a href="#"><span>Address</span> : {{ user_profile.profile.profile_address }}</a></li>
-						</ul><br>
-						{% if user.username == user_profile.username %}
-                        <div class="product_count">
-                        <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>
-                        {% endif %}               
-                        </div>
-					</div>
+				<div class="col-lg-5 offset-lg-1" style="padding-bottom: 50px;">
+          <table class="table table-borderless">
+            <tr>
+              <th><span>ID</span></th>
+              <td><span>{{ user_profile.username }}</span></td>
+            </tr>
+            <tr>
+              <th><span>Nickname</span></th>
+              <td><span>{{ user_profile.profile.nickname }}</span></td>
+            </tr>
+            <tr>
+              <th><span>Phone</span></th>
+              <td><span>{{ user_profile.profile.phone }}</span></td>
+            </tr>
+            <tr>
+              <th><span>Address</span></th>
+              <td><span>{{ user_profile.profile.profile_address }}</span></td>
+            </tr>
+          </table>
+          {% if user.username == user_profile.username %}
+            <div class="product_count">
+              <a class="button primary-btn" href="{% url 'users:edit' user_profile.id %}">회원정보 수정</a>
+            </div>
+          {% endif %}
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--================End Single Product Area =================-->
+  <!--================End Single Product Area =================-->
+
 {% endblock %}
