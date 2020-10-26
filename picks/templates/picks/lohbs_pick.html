@@ -7,22 +7,22 @@
 <link rel="stylesheet" href="{% static 'css/breadcrumb.css' %}">
 
 	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>My LOHB'S Pick</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center breadcrumb-content" style="margin-top: 0;">
+          <h2 class="page-title">My LOHB'S Pick</h2>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a href="{% url 'main' %}"><i class="fas fa-home"></i> Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">My LOHB'S Pick</li>
             </ol>
           </nav>
-				</div>
-			</div>
+        </div>
+      </div>
     </div>
-	</section>
-	<!-- ================ end banner area ================= -->
+  </section>
+  <!-- ================ end banner area ================= -->
   
   
 
