@@ -12,12 +12,6 @@ def main(request):
     return render(request, 'orders/main.html', {'orders': orders})
 
 
-# 주문 상세보기 페이지
-@login_required
-def show(request, id):
-    return render(request, 'orders/show.html')
-
-
 # 새로운 주문 작성 페이지
 @login_required
 def new(request, id):
