@@ -1,10 +1,9 @@
 # LOHB'S Pick  
 사이트 : http://lohbs-pick.site
 
-## 서비스 소개
 ### 기획배경
 ![slide3](./readme-images/slide-3.PNG)
-### 기능
+### 서비스 소개
 ![slide4](./readme-images/slide-4.PNG)
 ![slide5](./readme-images/slide-5.PNG)
 ![slide6](./readme-images/slide-6.PNG)
