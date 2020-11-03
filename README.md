@@ -1,5 +1,5 @@
 # LOHB'S Pick  
-:trophy: 2020 롯데그룹X멋쟁이사자처럼 해커톤 동상  
+:trophy: 2020 롯데그룹X멋쟁이사자처럼 온라인 해커톤 동상  
 사이트 : http://lohbs-pick.site
 
 ### 기획배경
