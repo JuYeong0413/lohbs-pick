@@ -2,7 +2,7 @@ certifi==2020.6.20
 chardet==3.0.4
 confusable-homoglyphs==3.2.0
 defusedxml==0.6.0
-Django==3.0.14
+Django==3.1.12
 django-allauth==0.42.0
 django-registration==3.1.2
 idna==2.10
